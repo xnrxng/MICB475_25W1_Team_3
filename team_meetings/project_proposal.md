@@ -30,6 +30,11 @@ Idea 4: Brooke
   2) Do either Vitamin K1 or Vitamin K2 have an impact on the gut microbiome and if so, are they different from each other?
   3) How does Vitamin K affect the microbiome in patients with atherosclerosis, does this change when Vitamin D is supplemented as well? How does Vitamin D alone affect the microbiome in these patients?
  
+Idea 5: Quin
+ - Dataset: Gut microbiome associated with diet Westernization in Colombia
+ - Possible Research Question
+   -- 1) How does an individual's METs minutes per week affect their gut microbiome composition, and how does it affect/differ between groups with and without           diabetes?
+ 
 Ideas for Methods (Rui):
 - For context, most of these datasets are about comparing the bacterial species of samples with different metadata/conditions. Since the format is pretty much the same, most methods can be applied on any dataset. I have done everything except networks and predicting functionality, so those two are the only ones I'm not 100% sure about.
 - Basic EDA (heatmaps, scatterplots, bar charts...)
