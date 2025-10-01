@@ -30,12 +30,12 @@ Idea 4: Brooke
   2) Do either Vitamin K1 or Vitamin K2 have an impact on the gut microbiome and if so, are they different from each other?
   3) How does Vitamin K affect the microbiome in patients with atherosclerosis, does this change when Vitamin D is supplemented as well? How does Vitamin D alone affect the microbiome in these patients?
  
-  Ideas for Methods (Rui):
-  - For context, most of these datasets are about comparing the bacterial species of samples with different metadata/conditions. Since the format is pretty much the same, most methods can be applied on any dataset. I have done everything except networks and predicting functionality, so those two are the only ones I'm not 100% sure about.
-  - Basic EDA (heatmaps, scatterplots, bar charts...)
-  - Alpha and beta diversity analyses (boxplots, PCoa, UMAP): is there a difference in diversity between conditions?
-  - Differential abundance testing (I think DESeq2 can be used): which bacteria differ between conditions statistically?
-  - Clustering (k-means possibly): are there any subgroups of bacteria within conditions?
-  - Networks: are there any bacteria that tend to appear together? Is it possible to determine how they are connected?
-  - Predict functionality (PICRUSt): what is the functionality of this family of bacteria? Is there a pathway associated?
-  - Machine learning (MLR, classifiers): how well can we predict a certain attribute? Which attributes influenced the target the most?
+Ideas for Methods (Rui):
+- For context, most of these datasets are about comparing the bacterial species of samples with different metadata/conditions. Since the format is pretty much the same, most methods can be applied on any dataset. I have done everything except networks and predicting functionality, so those two are the only ones I'm not 100% sure about.
+- Basic EDA (heatmaps, scatterplots, bar charts...)
+- Alpha and beta diversity analyses (boxplots, PCoa, UMAP): is there a difference in diversity between conditions?
+- Differential abundance testing (I think DESeq2 can be used): which bacteria differ between conditions statistically?
+- Clustering (k-means possibly): are there any subgroups of bacteria within conditions?
+- Networks: are there any bacteria that tend to appear together? Is it possible to determine how they are connected?
+- Predict functionality (PICRUSt): what is the functionality of this family of bacteria? Is there a pathway associated?
+- Machine learning (MLR, classifiers): how well can we predict a certain attribute? Which attributes influenced the target the most?
