@@ -8,17 +8,24 @@
 - Chad Prior Experience
   IBD, COVID
 - FOR THE MS DATASET
+  Note: has a lot of confounding factors that would need to be accounted for.
   Look into the disease-modifying therapies
 - FOR the depression
-  Look into if the dataset is annotated // NEW well annotated depression dataset, explore for novel studies
+  Look into whether the dataset is annotated, might lack HIV annotations // NEW well-annotated depression dataset but doesn't have HIV, explore for novel studies
 - Vitamin K supplementation may play a role in preventing/slowing down atherosclerosis
   (I'm so sorry I blacked out while you were talking about it)
-- Combine westernization dataset and new depression dataset to analyze the impact of METs_per_week on the microbiome and its affect on depression
+- Combine the westernization dataset and new depression dataset to analyze the impact of METs_per_week on the microbiome and its effect on depression
   There will be added steps with this study due to combining datasets
+- FOR METHODS:
+  Could do a LASSO regression on 16s data, but there are certain limitations when there are multiple variables
+  There is a module on Canvas on how to use PICRUst.
+  Avril can share the module on machine learning.
+  
 
 
   **TO DO**
   - Explore the metadata of each of the 3 proposed projects to better understand feasibility
-  - Add Chad once Evelyn releases Git IDs
+  - Add Chad once Evelyn releases Git IDs (DONE)
   - Create an agenda for the meeting on Oct 8, 2025
   - Select a project to move forward with by Oct 8, 2025
+  - POSSIBLY send a list of external datasets
