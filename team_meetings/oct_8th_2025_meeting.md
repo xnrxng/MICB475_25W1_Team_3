@@ -3,7 +3,7 @@
 **Agenda:**
 - Discuss the main idea of the project, which is the merging of the westernization dataset and the new depression dataset.
 - Discuss how to merge these datasets (normalization, meta-analysis) and the disadvantages and the benefits.
-- Where is the new depression dataset and its metadata? Does the depression dataset have annotated exercise levels?
+- Where is the new depression dataset and its metadata? Does the depression dataset have annotated exercise levels (specifically METS per week)?
 - Research questions:
   1. How does exercise impact the microbiome and in turn, how does it relate to depression?
      - Diversity between conditions: alpha and beta diversity
