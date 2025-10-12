@@ -12,3 +12,6 @@
 **/.Rproj.user
 **/.Rproj
 .Rproj.user
+
+# Data
+data/data_raw/demux_seqs.qza
