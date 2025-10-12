@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This script processed the FASTQ files using QIIME2
+# This script processes the FASTQ files using QIIME2.
 # Date: October 10th 2025
 
 ### exit on errors
@@ -15,6 +15,9 @@ conda activate qiime2-amplicon-2025.4
 mkdir -p data/data_raw
 mkdir -p data/data_processed
 cd data
+
+### copy metadata file to data_raw
+cp /datasets/project_2/colombia/colombia_metadata.txt data_raw
 
 ### import data and demultiplex
 qiime tools import \
