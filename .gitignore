@@ -1,0 +1,14 @@
+### R ###
+# History files
+**/.Rhistory
+**/.Rapp.history
+
+# Session Data files
+**/.RData
+**/.RDataTmp
+
+# User-specific files
+**/.Ruserdata
+**/.Rproj.user
+**/.Rproj
+.Rproj.user
