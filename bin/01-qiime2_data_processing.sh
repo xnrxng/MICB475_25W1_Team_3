@@ -2,6 +2,7 @@
 
 # This script processes the FASTQ files using QIIME2.
 # Date: October 10th 2025
+# Usage: bash bin/01-qiime2_data_processing.sh
 
 ### exit on errors
 set -euo pipefail
@@ -17,7 +18,8 @@ mkdir -p data/data_processed
 cd data
 
 ### copy metadata file to data_raw
-cp /datasets/project_2/colombia/colombia_metadata.txt data_raw
+### 
+# cp /datasets/project_2/colombia/colombia_metadata.txt data_raw
 
 ### import data and demultiplex
 qiime tools import \

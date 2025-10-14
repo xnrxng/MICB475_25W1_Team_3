@@ -1,0 +1,35 @@
+---
+title: "project title"
+author: "Rui Xiang Yu, Houria Afshar Moghaddam, Brooke Macleod, Quinlan Torstensen"
+format: 
+    html:
+        toc: true
+        toc-depth: 3
+        auto-stretch: false
+    pdf:
+        toc: true
+        toc-depth: 3 
+        fig-pos: "H"
+        auto-stretch: false
+editor: source
+bibliography: references.bib
+execute:
+    echo: false
+    warning: false
+---
+
+```{r}
+library(tidyverse)
+```
+
+## Introduction
+
+## Methods
+
+### October 10th
+Data was processed....
+### October ...
+
+## Results
+
+## References
