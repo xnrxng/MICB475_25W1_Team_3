@@ -2,8 +2,14 @@
 
 **Agenda:**
 - Discussing our chosen "healthy diet": percentage of carbs, fibre, protein, fat, which fats are being consumed (cholesterol, TAGs), LDL, HDL, BMI, weight, (not including calories?)
+- Discuss data normalization (log transform, CPM, TPM) and batch correction
 - Discussing our specific research question(s). Some potential options are:
- 1.
+ 1. How does the gut microbiota change between a balanced diet and an unbalanced diet, across different exercise levels? How is cardiovascular health affected by this?
+    - Which set of species/attributes predicts cardiovascular health the best? Can cardiovascular health even be predicted? Append OTU table and/or diversity metrics to patient metadata, split data into 2, perform LASSO regression on the training dataset for factor selection. Apply to the testing dataset for model metrics. Target variable is cardiovascular health. Possibly look into other models.
+    - Is there a difference in diversity? Compare the diversity metrics of both diets, as well as of different exercise groups.
+    - Are there any species that differentially appear? Differential abundance testing of both diets, as well as of different exercise groups as contrasts. Also test as interaction term. See which species overlap between the two.
+    - What is the functionality of this group of microbiota? Predict metagenomic functional profiles, compare functions by diet/exercise and link to CV health.
+    - Are there any species that appear consistently together? Identify taxa that co-occur consistently, and whether network structure differs by diet/exercise.
   
 - Columns of the metadata
  1. Adiponectin: a hormone from fat tissue that helps with insulin sensitivity and inflammation, and affects metabolic processes like fatty acid breakdown and regulating glucose levels.
@@ -13,3 +19,5 @@
  5. Systolic bp: systolic blood pressure is the top number in a blood pressure reading, representing the force of blood against artery walls when the heart contracts. Normal blood pressure is often considered to be around 120/80 mmHg. High blood pressure (hypertension) is consistently high readings, which can increase the risk of heart disease. For people over 50, a higher systolic number is a particularly important indicator of heart disease risk. 
  
 **Meeting notes:**
+
+**To do:**
