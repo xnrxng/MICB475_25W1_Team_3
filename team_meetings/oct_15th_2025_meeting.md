@@ -10,6 +10,12 @@
     - Are there any species that differentially appear? Differential abundance testing of both diets, as well as of different exercise groups as contrasts. Also test as interaction term. See which species overlap between the two.
     - What is the functionality of this group of microbiota? Predict metagenomic functional profiles, compare functions by diet/exercise and link to CV health.
     - Are there any species that appear consistently together? Identify taxa that co-occur consistently, and whether network structure differs by diet/exercise.
+   
+ 2. How does cardiovascular health relate to adiponectin levels and microbiome profile? How does exercise influence this?
+    - Adiponectin has anti-inflammatory properties protect vascular system, heart, lungs, colon and these levels vary based on sex and BMI
+    - Obesity is related to low adiponectin levels, and both obesity and adiponectin are related to poor cardiovascular health
+    - Found another paper that looks into adiponectin levels, microbiome, and obesity which found reduced adiponectin in all groups with any type of metabolic abnormalities compared to healthy individuals
+       - This paper did not incorporate exercise
   
 - Columns of the metadata
  1. Adiponectin: a hormone from fat tissue that helps with insulin sensitivity and inflammation, and affects metabolic processes like fatty acid breakdown and regulating glucose levels.
