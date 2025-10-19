@@ -1,4 +1,4 @@
-# [Project title]
+# Exploring the interplay between diet, exercise, and gut microbiota in modulating cardiovascular health and adiponectin levels
 
 *Authors: Rui Xiang Yu, Houria Afshar Moghaddam, Brooke Macleod, Quinlan Torstensen*
 
