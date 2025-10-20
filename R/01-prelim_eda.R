@@ -3,34 +3,67 @@
 # Usage: Rscript R/01-prelim_eda.R
 
 library(tidyverse)
+library(readr)
 library(utils)
 library(data.table)
 library(ggplot2)
 library(cowplot)
 library(vegan)
 library(Matrix)
-set.seed(2015)
+library(stats)
+library(pROC)
+set.seed(2025)
 
 main <- function(){
   # read in metadata
   meta <- fread("data/data_raw/colombia_metadata.txt")
   
-  # make histogram of calorie intake distribution colored by sex and BMI category. add median lines
-  sex_median_values_cal <- meta |>
+  # remove outliers which is ppl with over 3k calories and under 1.2k calories
+  #meta_filt <- meta[(meta$Calorie_intake < 3000) & (meta$Calorie_intake > 1200), , drop = FALSE]
+  # remove rows with NA values
+  meta_filt <- na.omit(meta)
+  
+  # make rownames sample id
+  meta_filt <- as.data.frame(meta_filt)
+  rownames(meta_filt) <- meta_filt$`#SampleID`
+  meta_filt <- meta_filt |>
+    dplyr::select(-`#SampleID`)
+  
+  # summary table of metadata
+  summary_table <- meta_filt |>
+    summarise(across(everything(), ~ {
+      if (is.numeric(.x)) {
+        paste0(min(.x, na.rm = TRUE), " – ", max(.x, na.rm = TRUE))
+      } else {
+        vals <- unique(.x)
+        paste(sort(vals), collapse = ", ")
+      }
+    })) |>
+    pivot_longer(cols = everything(),
+                 names_to = "Variable",
+                 values_to = "Range_or_Categories")
+  saveRDS(summary_table, "results/0-metadata_summary.rds")
+  
+  # get rid of country since it's only one category. also latitude since it is redundant with city
+  meta_filt <- meta_filt |>
+    select(-country, -latitude)
+  
+  # make histogram of fiber intake distribution colored by sex and cardiovascular health category. add median lines
+  sex_median_values_fiber <- meta_filt |>
     group_by(sex) |>
-    summarize(median_calorie = median(Calorie_intake, na.rm = TRUE))
+    summarize(median_fiber = median(fiber, na.rm = TRUE))
   
-  bmi_median_values_ca <- meta |>
-    group_by(BMI_class) |>
-    summarize(median_calorie = median(Calorie_intake, na.rm = TRUE))
+  cv_median_values_fiber <- meta_filt |>
+    group_by(Cardiometabolic_status) |>
+    summarize(median_fiber = median(fiber, na.rm = TRUE))
   
   
-  p_cal_sex <- ggplot(meta, aes(x = Calorie_intake, fill = sex, color = sex)) +
+  p_fiber_sex <- ggplot(meta_filt, aes(x = fiber, fill = sex, color = sex)) +
     geom_histogram(alpha = 0.6) +
     labs(
-      x = "Daily calorie intake (kcal)",
+      x = "Daily fiber intake (g)",
       y = "Number of people",
-      title = "Calorie Intake Distribution per Sex",
+      title = "Fiber Intake Distribution per Sex",
       color = "Biological Sex",
       fill = "Biological Sex"
     ) +
@@ -39,8 +72,8 @@ main <- function(){
       values = c("male" = "#df8e5f", "female" = "#67dce5")
     ) +
     geom_vline(
-      data = sex_median_values_cal,
-      aes(xintercept = median_calorie, color = sex),
+      data = sex_median_values_fiber,
+      aes(xintercept = median_fiber, color = sex),
       linetype = "dashed",
       linewidth = 1
     ) +
@@ -49,45 +82,45 @@ main <- function(){
     )+
     theme(legend.position = "none")
   
-  p_cal_bmi <- ggplot(meta, aes(x = Calorie_intake, fill = BMI_class, color = BMI_class)) +
+  p_fiber_cv <- ggplot(meta_filt, aes(x = fiber, fill = Cardiometabolic_status, color = Cardiometabolic_status)) +
     geom_histogram(alpha = 0.6) +
     labs(
-      x = "Daily calorie intake (kcal)",
+      x = "Daily fiber intake (g)",
       y = "Number of people",
-      title = "Calorie Intake Distribution per BMI Category",
-      color = "BMI Category",
-      fill = "BMI Category"
+      title = "Fiber Intake Distribution per Cardiometabolic Status",
+      color = "Cardiometabolic \nstatus",
+      fill = "Cardiometabolic \nstatus"
     ) +
     scale_color_manual(
-      values = c("Overweight" = "#0D6E1F", "Obese" = "#C20010", "Lean" = "#502682")
+      values = c("Healthy" = "#0D6E1F", "Abnormal" = "#C20010")
     ) +
     scale_fill_manual(
-      values = c("Overweight" = "#B4DC7F", "Obese" = "#FFA0AC", "Lean" = "#C9B1E7")
+      values = c("Healthy" = "#B4DC7F", "Abnormal" = "#FFA0AC")
     ) +
     geom_vline(
-      data = bmi_median_values_ca,
-      aes(xintercept = median_calorie, color = BMI_class),
+      data = cv_median_values_fiber,
+      aes(xintercept = median_fiber, color = Cardiometabolic_status),
       linetype = "dashed",
       linewidth = 1
     ) +
     theme_classic()+
     theme(legend.position = "none")
   
-  # make histogram of calorie intake distribution colored by sex and BMI category. add median lines
-  sex_median_values <- meta |>
+  # make histogram of met distribution colored by sex and cv category. add median lines
+  sex_median_values_met <- meta_filt |>
     group_by(sex) |>
-    summarize(median_age = median(age_years, na.rm = TRUE))
+    summarize(median_met = median(MET_mins_per_week, na.rm = TRUE))
   
-  bmi_median_values <- meta |>
-    group_by(BMI_class) |>
-    summarize(median_age = median(age_years, na.rm = TRUE))
+  cv_median_values_met <- meta_filt |>
+    group_by(Cardiometabolic_status) |>
+    summarize(median_met = median(MET_mins_per_week, na.rm = TRUE))
   
-  p_age_sex <- ggplot(meta, aes(x = age_years, fill = sex, color = sex)) +
+  p_met_sex <- ggplot(meta_filt, aes(x = MET_mins_per_week, fill = sex, color = sex)) +
     geom_histogram(alpha = 0.6) +
     labs(
-      x = "Age (years)",
+      x = "Metabolic Equivalent of Task (min/week)",
       y = "Number of people",
-      title = "Age Distribution per Sex",
+      title = "MET Distribution per Sex",
       color = "Biological Sex",
       fill = "Biological Sex"
     ) +
@@ -96,8 +129,64 @@ main <- function(){
       values = c("male" = "#df8e5f", "female" = "#67dce5")
     ) +
     geom_vline(
-      data = sex_median_values,
-      aes(xintercept = median_age, color = sex),
+      data = sex_median_values_met,
+      aes(xintercept = median_met, color = sex),
+      linetype = "dashed",
+      linewidth = 1
+    ) +
+    scale_color_manual(
+      values = c("male" = "#b35e27", "female" = "#1fa2b3")
+    )+
+    theme(legend.position = "none")
+  
+  p_met_cv <- ggplot(meta_filt, aes(x = MET_mins_per_week, fill = Cardiometabolic_status, color = Cardiometabolic_status)) +
+    geom_histogram(alpha = 0.6) +
+    labs(
+      x = "Metabolic Equivalent of Task (min/week)",
+      y = "Number of people",
+      title = "MET Distribution per Cardiometabolic_status"
+    ) +
+    theme_classic() +
+    scale_color_manual(
+      values = c("Healthy" = "#0D6E1F", "Abnormal" = "#C20010")
+    ) +
+    scale_fill_manual(
+      values = c("Healthy" = "#B4DC7F", "Abnormal" = "#FFA0AC")
+    ) +
+    geom_vline(
+      data = cv_median_values_met,
+      aes(xintercept = median_met, color = Cardiometabolic_status),
+      linetype = "dashed",
+      linewidth = 1
+    )+
+    theme(legend.position = "none")
+  
+  # make histogram of adiponectin distribution colored by sex and cardiovascular health category. add median lines
+  sex_median_values_adi <- meta_filt |>
+    group_by(sex) |>
+    summarize(median_adi = median(adiponectin, na.rm = TRUE))
+  
+  cv_median_values_adi <- meta_filt |>
+    group_by(Cardiometabolic_status) |>
+    summarize(median_adi = median(adiponectin, na.rm = TRUE))
+  
+  
+  p_adi_sex <- ggplot(meta_filt, aes(x = adiponectin, fill = sex, color = sex)) +
+    geom_histogram(alpha = 0.6) +
+    labs(
+      x = "Adiponectin level (\U00B5g/mL)",
+      y = "Number of people",
+      title = "Adiponectin Distribution per Sex",
+      color = "Biological Sex",
+      fill = "Biological Sex"
+    ) +
+    theme_classic() +
+    scale_fill_manual(
+      values = c("male" = "#df8e5f", "female" = "#67dce5")
+    ) +
+    geom_vline(
+      data = sex_median_values_adi,
+      aes(xintercept = median_adi, color = sex),
       linetype = "dashed",
       linewidth = 1
     ) +
@@ -105,68 +194,86 @@ main <- function(){
       values = c("male" = "#b35e27", "female" = "#1fa2b3")
     )
   
-  p_age_bmi <- ggplot(meta, aes(x = age_years, fill = BMI_class, color = BMI_class)) +
+  p_adi_cv <- ggplot(meta_filt, aes(x = adiponectin, fill = Cardiometabolic_status, color = Cardiometabolic_status)) +
     geom_histogram(alpha = 0.6) +
     labs(
-      x = "Age (years)",
+      x = "Adiponectin level (\U00B5g/mL)",
       y = "Number of people",
-      title = "Calorie Intake Distribution per BMI Category",
-      color = "BMI Category",
-      fill = "BMI Category"
+      title = "Adiponectin Distribution per Cardiometabolic Status",
+      color = "Cardiometabolic \nstatus",
+      fill = "Cardiometabolic \nstatus"
     ) +
-    theme_classic() +
     scale_color_manual(
-      values = c("Overweight" = "#0D6E1F", "Obese" = "#C20010", "Lean" = "#502682")
+      values = c("Healthy" = "#0D6E1F", "Abnormal" = "#C20010")
     ) +
     scale_fill_manual(
-      values = c("Overweight" = "#B4DC7F", "Obese" = "#FFA0AC", "Lean" = "#C9B1E7")
+      values = c("Healthy" = "#B4DC7F", "Abnormal" = "#FFA0AC")
     ) +
     geom_vline(
-      data = bmi_median_values,
-      aes(xintercept = median_age, color = BMI_class),
+      data = cv_median_values_adi,
+      aes(xintercept = median_adi, color = Cardiometabolic_status),
       linetype = "dashed",
       linewidth = 1
-    )
+    ) +
+    theme_classic()
   
-  plotlist_hist <- list(p_cal_sex, p_age_sex, p_cal_bmi, p_age_bmi)
-  
-  # combine 4 plots into one and save
-  comb_hists <- cowplot::plot_grid(plotlist = plotlist_hist, ncol = 2)
-  cowplot::save_plot(plot = comb_hists, "results/01-bmi_and_age_hists.png", base_height = 8, base_width = 10)
-  
-  # remove outliers which is ppl with over 3k calories and under 1.2k calories
-  meta_filt <- meta[(meta$Calorie_intake < 3000) & (meta$Calorie_intake > 1200), , drop = FALSE]
-  meta_filt <- na.omit(meta_filt)
+  # combine 6 plots into one and save
+  plotlist_hist <- list(p_fiber_sex, p_met_sex, p_adi_sex, p_fiber_cv, p_met_cv, p_adi_cv)
+  comb_hists <- cowplot::plot_grid(plotlist = plotlist_hist, ncol = 3)
+  cowplot::save_plot(plot = comb_hists, "results/01-fiber_met_adi_hists.png", base_height = 6, base_width = 12)
   
   # see number of healthy vs abnormal status
   counts_cardiometabolic_status <- meta_filt |> group_by(Cardiometabolic_status) |> count()
   saveRDS(counts_cardiometabolic_status, "results/02-counts_cardiometabolic_status.rds")
   
-  # read otu table, convert it to sparce matix and filter it
+  # read otu table 
   otu_table <- fread("data/data_processed/feature-table.txt")
-  rownames(otu_table) <- otu_table$`#OTU ID`
-  otu_table <- otu_table |>
-    dplyr::select(-`#OTU ID`)
   
-  meta_filt <- as.data.frame(meta_filt)
-  rownames(meta_filt) <- meta_filt$`#SampleID`
-  meta_filt <- meta_filt |>
-    dplyr::select(-`#SampleID`)
+  # bulk counts based on phylum
+  taxonomy_tbl <- read_tsv("data/data_processed/taxonomy.tsv")
+  taxonomy_mat <- taxonomy_tbl |> 
+    dplyr::select(-Confidence) |>
+    separate(col = Taxon, sep = "; ",
+             into = c("Domain", "Phylum", "Class", "Order", "Family", "Genus", "Species"))
   
-  otu_table <- as(otu_table, "sparseMatrix") 
-  otu_table_filt <- otu_table[, (colnames(otu_table) %in% rownames(meta_filt))]
+  merge_tbl <- merge(otu_table, taxonomy_mat, by.x = "#OTU ID", by.y = "Feature ID")
+  
+  otu_phylum <- merge_tbl |>
+    group_by(Phylum) |>
+    summarise(across(where(is.numeric), sum))
+  
+  otu_phylum_clean <- otu_phylum[, colnames(otu_phylum) != meta$`#SampleID`[!(meta$`#SampleID` %in% rownames(meta_filt))]]
+  otu_phylum_clean <- na.omit(otu_phylum_clean)
+  otu_phylum_clean <- as.data.frame(otu_phylum_clean)
+  rownames(otu_phylum_clean) <- otu_phylum_clean$Phylum
+  otu_phylum_clean <- otu_phylum_clean |>
+    select(-Phylum)
   
   # redundancy analysis
-  otu_table_filt <- otu_table_filt[, rownames(meta_filt)]
-  otu_table_filt <- t(otu_table_filt)
+  otu_phylum_clean <- otu_phylum_clean[, rownames(meta_filt)]
+  otu_phylum_clean[] <- lapply(otu_phylum_clean, as.numeric)
+  otu_phylum_clean_t <- t(otu_phylum_clean)
   
-  otu_hel <- decostand(otu_table_filt, method = "hellinger")
+  otu_hel <- decostand(otu_phylum_clean_t, method = "hellinger")
 
-  rda_model <- rda(otu_hel ~ adiponectin + age_years + BMI + Body_Fat_Percentage + Calorie_intake + city + diastolic_bp + fiber + glucose + Total_Cholesterol + HDL + LDL + VLDL + Triglycerides + sex + MET_mins_per_week + systolic_bp + per_carbohydrates + per_total_protein + per_total_fat + per_monoinsaturated_fat + per_polyunsaturated_fat + Hemoglobin_a1c + CRP + insulin, data = meta_filt)
+  rda_model <- vegan::rda(otu_hel ~ . , data = meta_filt)
   
   saveRDS(rda_model, "results/03-prelim_rda_model.rds")
   
+  anova_rda <- anova(rda_model, by = "term", permutations = 999)
   
+  saveRDS(anova_rda, "results/04-prelim_anova_rda.rds")
+  
+  # prelim logistic regression of cardiometabolic status based on metadata only
+  meta_filt$Cardiometabolic_status <- factor(meta_filt$Cardiometabolic_status,
+                                             levels = c("Healthy", "Abnormal"))
+  
+  mdl <- glm(Cardiometabolic_status ~ ., data = meta_filt, family = binomial)
+  mdl_summary <- summary(mdl)$coefficients
+  mdl_summary <- as.data.frame(mdl_summary)
+  mdl_summary$Variable <- rownames(mdl_summary)
+  saveRDS(mdl_summary, "results/05-log_reg_summary.rds")
+
 }
 
 # helper functions
