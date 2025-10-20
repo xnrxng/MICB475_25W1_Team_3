@@ -1,0 +1,37 @@
+Variable	Range_or_Categories
+adiponectin	0 – 28.21
+age_years	18 – 62
+age_range	18_40, 41_62
+BMI	18.6 – 47.4
+BMI_class	Lean, Obese, Overweight
+Body_Fat_Percentage	18.7 – 48.7
+Calorie_intake	634 – 4034
+Cardiometabolic_status	Abnormal, Healthy
+city	Barranquilla, Bogota, Bucaramanga, Cali, Medellin
+country	Colombia
+diastolic_bp	50 – 126
+fiber	7 – 44
+glucose	64 – 335
+Hemoglobin_a1c	4.6 – 10.77
+CRP	0.12 – 44.3
+insulin	1.95 – 57.07
+latitude	3.42 – 10.96
+Total_Cholesterol	67 – 302
+HDL	11 – 134
+LDL	30 – 219
+VLDL	6 – 218
+Triglycerides	28 – 1090
+medication	No, Yes
+per_carbohydrates	45.89 – 64.87
+per_total_protein	11.95 – 21.11
+per_total_fat	21.51 – 36.83
+per_animal_protein	39.41 – 74.48
+per_monoinsaturated_fat	6.85 – 12.55
+per_polyunsaturated_fat	3.48 – 7.86
+per_saturated_fat	7.46 – 16.06
+sex	female, male
+smoker	No, Yes
+stool_consistency	Diarrheic, Hard, Normal, soft
+systolic_bp	76 – 204
+MET_mins_per_week	0 – 45204.6
+waist_circumference	65.2 – 131.3

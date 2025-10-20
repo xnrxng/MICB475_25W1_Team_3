@@ -11,7 +11,8 @@ library(cowplot)
 library(vegan)
 library(Matrix)
 library(stats)
-library(pROC)
+library(ape)
+library(phyloseq)
 set.seed(2025)
 
 main <- function(){
@@ -42,7 +43,7 @@ main <- function(){
     pivot_longer(cols = everything(),
                  names_to = "Variable",
                  values_to = "Range_or_Categories")
-  saveRDS(summary_table, "results/0-metadata_summary.rds")
+  write_tsv(summary_table, "results/0-metadata_summary.tsv")
   
   # get rid of country since it's only one category. also latitude since it is redundant with city
   meta_filt <- meta_filt |>
@@ -224,7 +225,7 @@ main <- function(){
   
   # see number of healthy vs abnormal status
   counts_cardiometabolic_status <- meta_filt |> group_by(Cardiometabolic_status) |> count()
-  saveRDS(counts_cardiometabolic_status, "results/02-counts_cardiometabolic_status.rds")
+  write_tsv(counts_cardiometabolic_status, "results/02-counts_cardiometabolic_status.tsv")
   
   # read otu table 
   otu_table <- fread("data/data_processed/feature-table.txt")
@@ -261,8 +262,9 @@ main <- function(){
   saveRDS(rda_model, "results/03-prelim_rda_model.rds")
   
   anova_rda <- anova(rda_model, by = "term", permutations = 999)
+  anova_rda <- rownames_to_column(anova_rda, var = "variable")
   
-  saveRDS(anova_rda, "results/04-prelim_anova_rda.rds")
+  write_tsv(anova_rda, "results/04-prelim_anova_rda.tsv")
   
   # prelim logistic regression of cardiometabolic status based on metadata only
   meta_filt$Cardiometabolic_status <- factor(meta_filt$Cardiometabolic_status,
@@ -272,7 +274,38 @@ main <- function(){
   mdl_summary <- summary(mdl)$coefficients
   mdl_summary <- as.data.frame(mdl_summary)
   mdl_summary$Variable <- rownames(mdl_summary)
-  saveRDS(mdl_summary, "results/05-log_reg_summary.rds")
+  write_tsv(mdl_summary, "results/05-log_reg_summary.tsv")
+  
+  ### create phyloseq object
+  tree <- read.tree(file = "data/data_processed/tree.nwk")
+  
+  sample <- sample_data(meta_filt)
+  
+  otu_table <- as.data.frame(otu_table)
+  otu_table <- otu_table[, colnames(otu_table) != meta$`#SampleID`[!(meta$`#SampleID` %in% rownames(meta_filt))]]
+  rownames(otu_table) <- otu_table$`#OTU ID`
+  otu_table <- otu_table |> select(-`#OTU ID`)
+  otu_mat <- as.matrix(otu_table)
+  otu_tb <- otu_table(otu_mat, taxa_are_rows = TRUE)
+  
+  taxonomy_mat <- as.data.frame(taxonomy_mat)
+  rownames(taxonomy_mat) <- taxonomy_mat$`Feature ID`
+  taxonomy_mat <- taxonomy_mat[,-1]
+  taxonomy_mat <- as.matrix(taxonomy_mat)
+  taxa_tb <- tax_table(taxonomy_mat)
+  
+  # converting it into the phyloseq object
+  phyloseq_obj <- phyloseq(otu_tb, sample, taxa_tb, tree)
+
+  # keeping bacteria, getting rid of chloroplasts and mitochondria
+  phyloseq_obj <- subset_taxa(phyloseq_obj, Domain == "d__Bacteria" & Class!="c__Chloroplast" & Family !="f__Mitochondria")
+  saveRDS(phyloseq_obj, "data/data_raw/phyloseq_object.rds")
+  
+  # rarecurve plot and rarefying
+  p_rare <- rarecurve(t(as.data.frame(otu_table(phyloseq_obj))), cex = 0.1)
+  ggsave(plot = p_rare,filename =  "results/06-rarecurve.png")
+  # phyloseq_obj_rare <- rarefy_even_depth(phyloseq_obj, sample.size = 1000, rngseed = 1, verbose = TRUE)
+  
 
 }
 
