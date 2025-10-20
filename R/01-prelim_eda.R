@@ -8,6 +8,8 @@ library(data.table)
 library(ggplot2)
 library(cowplot)
 library(vegan)
+library(Matrix)
+set.seed(2015)
 
 main <- function(){
   # read in metadata
@@ -134,10 +136,36 @@ main <- function(){
   
   # remove outliers which is ppl with over 3k calories and under 1.2k calories
   meta_filt <- meta[(meta$Calorie_intake < 3000) & (meta$Calorie_intake > 1200), , drop = FALSE]
+  meta_filt <- na.omit(meta_filt)
   
   # see number of healthy vs abnormal status
   counts_cardiometabolic_status <- meta_filt |> group_by(Cardiometabolic_status) |> count()
   saveRDS(counts_cardiometabolic_status, "results/02-counts_cardiometabolic_status.rds")
+  
+  # read otu table, convert it to sparce matix and filter it
+  otu_table <- fread("data/data_processed/feature-table.txt")
+  rownames(otu_table) <- otu_table$`#OTU ID`
+  otu_table <- otu_table |>
+    dplyr::select(-`#OTU ID`)
+  
+  meta_filt <- as.data.frame(meta_filt)
+  rownames(meta_filt) <- meta_filt$`#SampleID`
+  meta_filt <- meta_filt |>
+    dplyr::select(-`#SampleID`)
+  
+  otu_table <- as(otu_table, "sparseMatrix") 
+  otu_table_filt <- otu_table[, (colnames(otu_table) %in% rownames(meta_filt))]
+  
+  # redundancy analysis
+  otu_table_filt <- otu_table_filt[, rownames(meta_filt)]
+  otu_table_filt <- t(otu_table_filt)
+  
+  otu_hel <- decostand(otu_table_filt, method = "hellinger")
+
+  rda_model <- rda(otu_hel ~ adiponectin + age_years + BMI + Body_Fat_Percentage + Calorie_intake + city + diastolic_bp + fiber + glucose + Total_Cholesterol + HDL + LDL + VLDL + Triglycerides + sex + MET_mins_per_week + systolic_bp + per_carbohydrates + per_total_protein + per_total_fat + per_monoinsaturated_fat + per_polyunsaturated_fat + Hemoglobin_a1c + CRP + insulin, data = meta_filt)
+  
+  saveRDS(rda_model, "results/03-prelim_rda_model.rds")
+  
   
 }
 
