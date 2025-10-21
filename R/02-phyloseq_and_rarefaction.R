@@ -69,6 +69,184 @@ main <- function(){
 
   phyloseq_obj_rare <- rarefy_even_depth(phyloseq_obj, sample.size = 24406, rngseed = 2025, verbose = TRUE)
   saveRDS(phyloseq_obj_rare, "data/data_processed/phyloseq_obj_rarefied.rds")
+  
+  ### remake hist plots with fewer samples
+  meta_rare <- sample_data(phyloseq_obj_rare)
+  
+  # make histogram of fiber intake distribution colored by sex and cardiovascular health category. add median lines
+  sex_median_values_fiber <- meta_rare |>
+    group_by(sex) |>
+    summarize(median_fiber = median(fiber, na.rm = TRUE))
+  
+  cv_median_values_fiber <- meta_rare |>
+    group_by(Cardiometabolic_status) |>
+    summarize(median_fiber = median(fiber, na.rm = TRUE))
+  
+  
+  p_fiber_sex <- ggplot(meta_rare, aes(x = fiber, fill = sex, color = sex)) +
+    geom_histogram(alpha = 0.6) +
+    labs(
+      x = "Daily fiber intake (g)",
+      y = "Number of people",
+      title = "Fiber Intake Distribution per Sex",
+      color = "Biological Sex",
+      fill = "Biological Sex"
+    ) +
+    theme_classic() +
+    scale_fill_manual(
+      values = c("male" = "#df8e5f", "female" = "#67dce5")
+    ) +
+    geom_vline(
+      data = sex_median_values_fiber,
+      aes(xintercept = median_fiber, color = sex),
+      linetype = "dashed",
+      linewidth = 1
+    ) +
+    scale_color_manual(
+      values = c("male" = "#b35e27", "female" = "#1fa2b3")
+    )+
+    theme(legend.position = "none")
+  
+  p_fiber_cv <- ggplot(meta_rare, aes(x = fiber, fill = Cardiometabolic_status, color = Cardiometabolic_status)) +
+    geom_histogram(alpha = 0.6) +
+    labs(
+      x = "Daily fiber intake (g)",
+      y = "Number of people",
+      title = "Fiber Intake Distribution per Cardiometabolic Status",
+      color = "Cardiometabolic \nstatus",
+      fill = "Cardiometabolic \nstatus"
+    ) +
+    scale_color_manual(
+      values = c("Healthy" = "#0D6E1F", "Abnormal" = "#C20010")
+    ) +
+    scale_fill_manual(
+      values = c("Healthy" = "#B4DC7F", "Abnormal" = "#FFA0AC")
+    ) +
+    geom_vline(
+      data = cv_median_values_fiber,
+      aes(xintercept = median_fiber, color = Cardiometabolic_status),
+      linetype = "dashed",
+      linewidth = 1
+    ) +
+    theme_classic()+
+    theme(legend.position = "none")
+  
+  # make histogram of met distribution colored by sex and cv category. add median lines
+  sex_median_values_met <- meta_rare |>
+    group_by(sex) |>
+    summarize(median_met = median(MET_mins_per_week, na.rm = TRUE))
+  
+  cv_median_values_met <- meta_rare |>
+    group_by(Cardiometabolic_status) |>
+    summarize(median_met = median(MET_mins_per_week, na.rm = TRUE))
+  
+  p_met_sex <- ggplot(meta_rare, aes(x = MET_mins_per_week, fill = sex, color = sex)) +
+    geom_histogram(alpha = 0.6) +
+    labs(
+      x = "Metabolic Equivalent of Task (min/week)",
+      y = "Number of people",
+      title = "MET Distribution per Sex",
+      color = "Biological Sex",
+      fill = "Biological Sex"
+    ) +
+    theme_classic() +
+    scale_fill_manual(
+      values = c("male" = "#df8e5f", "female" = "#67dce5")
+    ) +
+    geom_vline(
+      data = sex_median_values_met,
+      aes(xintercept = median_met, color = sex),
+      linetype = "dashed",
+      linewidth = 1
+    ) +
+    scale_color_manual(
+      values = c("male" = "#b35e27", "female" = "#1fa2b3")
+    )+
+    theme(legend.position = "none")
+  
+  p_met_cv <- ggplot(meta_rare, aes(x = MET_mins_per_week, fill = Cardiometabolic_status, color = Cardiometabolic_status)) +
+    geom_histogram(alpha = 0.6) +
+    labs(
+      x = "Metabolic Equivalent of Task (min/week)",
+      y = "Number of people",
+      title = "MET Distribution per Cardiometabolic_status"
+    ) +
+    theme_classic() +
+    scale_color_manual(
+      values = c("Healthy" = "#0D6E1F", "Abnormal" = "#C20010")
+    ) +
+    scale_fill_manual(
+      values = c("Healthy" = "#B4DC7F", "Abnormal" = "#FFA0AC")
+    ) +
+    geom_vline(
+      data = cv_median_values_met,
+      aes(xintercept = median_met, color = Cardiometabolic_status),
+      linetype = "dashed",
+      linewidth = 1
+    )+
+    theme(legend.position = "none")
+  
+  # make histogram of adiponectin distribution colored by sex and cardiovascular health category. add median lines
+  sex_median_values_adi <- meta_rare |>
+    group_by(sex) |>
+    summarize(median_adi = median(adiponectin, na.rm = TRUE))
+  
+  cv_median_values_adi <- meta_rare |>
+    group_by(Cardiometabolic_status) |>
+    summarize(median_adi = median(adiponectin, na.rm = TRUE))
+  
+  
+  p_adi_sex <- ggplot(meta_rare, aes(x = adiponectin, fill = sex, color = sex)) +
+    geom_histogram(alpha = 0.6) +
+    labs(
+      x = "Adiponectin level (\U00B5g/mL)",
+      y = "Number of people",
+      title = "Adiponectin Distribution per Sex",
+      color = "Biological Sex",
+      fill = "Biological Sex"
+    ) +
+    theme_classic() +
+    scale_fill_manual(
+      values = c("male" = "#df8e5f", "female" = "#67dce5")
+    ) +
+    geom_vline(
+      data = sex_median_values_adi,
+      aes(xintercept = median_adi, color = sex),
+      linetype = "dashed",
+      linewidth = 1
+    ) +
+    scale_color_manual(
+      values = c("male" = "#b35e27", "female" = "#1fa2b3")
+    )
+  
+  p_adi_cv <- ggplot(meta_rare, aes(x = adiponectin, fill = Cardiometabolic_status, color = Cardiometabolic_status)) +
+    geom_histogram(alpha = 0.6) +
+    labs(
+      x = "Adiponectin level (\U00B5g/mL)",
+      y = "Number of people",
+      title = "Adiponectin Distribution per Cardiometabolic Status",
+      color = "Cardiometabolic \nstatus",
+      fill = "Cardiometabolic \nstatus"
+    ) +
+    scale_color_manual(
+      values = c("Healthy" = "#0D6E1F", "Abnormal" = "#C20010")
+    ) +
+    scale_fill_manual(
+      values = c("Healthy" = "#B4DC7F", "Abnormal" = "#FFA0AC")
+    ) +
+    geom_vline(
+      data = cv_median_values_adi,
+      aes(xintercept = median_adi, color = Cardiometabolic_status),
+      linetype = "dashed",
+      linewidth = 1
+    ) +
+    theme_classic()
+  
+  # combine 6 plots into one and save
+  plotlist_hist <- list(p_fiber_sex, p_met_sex, p_adi_sex, p_fiber_cv, p_met_cv, p_adi_cv)
+  comb_hists <- cowplot::plot_grid(plotlist = plotlist_hist, ncol = 3)
+  cowplot::save_plot(plot = comb_hists, "results/07-fiber_met_adi_hists_after_rarefaction.png", base_height = 6, base_width = 12)
+  
 }
 
 #helper functions

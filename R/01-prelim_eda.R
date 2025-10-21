@@ -50,16 +50,16 @@ main <- function(){
     select(-country, -latitude)
   
   # make histogram of fiber intake distribution colored by sex and cardiovascular health category. add median lines
-  sex_median_values_fiber <- meta_filt |>
+  sex_median_values_fiber <- meta |>
     group_by(sex) |>
     summarize(median_fiber = median(fiber, na.rm = TRUE))
   
-  cv_median_values_fiber <- meta_filt |>
+  cv_median_values_fiber <- meta |>
     group_by(Cardiometabolic_status) |>
     summarize(median_fiber = median(fiber, na.rm = TRUE))
   
   
-  p_fiber_sex <- ggplot(meta_filt, aes(x = fiber, fill = sex, color = sex)) +
+  p_fiber_sex <- ggplot(meta, aes(x = fiber, fill = sex, color = sex)) +
     geom_histogram(alpha = 0.6) +
     labs(
       x = "Daily fiber intake (g)",
@@ -83,7 +83,7 @@ main <- function(){
     )+
     theme(legend.position = "none")
   
-  p_fiber_cv <- ggplot(meta_filt, aes(x = fiber, fill = Cardiometabolic_status, color = Cardiometabolic_status)) +
+  p_fiber_cv <- ggplot(meta, aes(x = fiber, fill = Cardiometabolic_status, color = Cardiometabolic_status)) +
     geom_histogram(alpha = 0.6) +
     labs(
       x = "Daily fiber intake (g)",
@@ -108,15 +108,15 @@ main <- function(){
     theme(legend.position = "none")
   
   # make histogram of met distribution colored by sex and cv category. add median lines
-  sex_median_values_met <- meta_filt |>
+  sex_median_values_met <- meta |>
     group_by(sex) |>
     summarize(median_met = median(MET_mins_per_week, na.rm = TRUE))
   
-  cv_median_values_met <- meta_filt |>
+  cv_median_values_met <- meta |>
     group_by(Cardiometabolic_status) |>
     summarize(median_met = median(MET_mins_per_week, na.rm = TRUE))
   
-  p_met_sex <- ggplot(meta_filt, aes(x = MET_mins_per_week, fill = sex, color = sex)) +
+  p_met_sex <- ggplot(meta, aes(x = MET_mins_per_week, fill = sex, color = sex)) +
     geom_histogram(alpha = 0.6) +
     labs(
       x = "Metabolic Equivalent of Task (min/week)",
@@ -140,7 +140,7 @@ main <- function(){
     )+
     theme(legend.position = "none")
   
-  p_met_cv <- ggplot(meta_filt, aes(x = MET_mins_per_week, fill = Cardiometabolic_status, color = Cardiometabolic_status)) +
+  p_met_cv <- ggplot(meta, aes(x = MET_mins_per_week, fill = Cardiometabolic_status, color = Cardiometabolic_status)) +
     geom_histogram(alpha = 0.6) +
     labs(
       x = "Metabolic Equivalent of Task (min/week)",
@@ -163,16 +163,16 @@ main <- function(){
     theme(legend.position = "none")
   
   # make histogram of adiponectin distribution colored by sex and cardiovascular health category. add median lines
-  sex_median_values_adi <- meta_filt |>
+  sex_median_values_adi <- meta |>
     group_by(sex) |>
     summarize(median_adi = median(adiponectin, na.rm = TRUE))
   
-  cv_median_values_adi <- meta_filt |>
+  cv_median_values_adi <- meta |>
     group_by(Cardiometabolic_status) |>
     summarize(median_adi = median(adiponectin, na.rm = TRUE))
   
   
-  p_adi_sex <- ggplot(meta_filt, aes(x = adiponectin, fill = sex, color = sex)) +
+  p_adi_sex <- ggplot(meta, aes(x = adiponectin, fill = sex, color = sex)) +
     geom_histogram(alpha = 0.6) +
     labs(
       x = "Adiponectin level (\U00B5g/mL)",
@@ -195,7 +195,7 @@ main <- function(){
       values = c("male" = "#b35e27", "female" = "#1fa2b3")
     )
   
-  p_adi_cv <- ggplot(meta_filt, aes(x = adiponectin, fill = Cardiometabolic_status, color = Cardiometabolic_status)) +
+  p_adi_cv <- ggplot(meta, aes(x = adiponectin, fill = Cardiometabolic_status, color = Cardiometabolic_status)) +
     geom_histogram(alpha = 0.6) +
     labs(
       x = "Adiponectin level (\U00B5g/mL)",
@@ -224,7 +224,7 @@ main <- function(){
   cowplot::save_plot(plot = comb_hists, "results/01-fiber_met_adi_hists.png", base_height = 6, base_width = 12)
   
   # see number of healthy vs abnormal status
-  counts_cardiometabolic_status <- meta_filt |> group_by(Cardiometabolic_status) |> count()
+  counts_cardiometabolic_status <- meta |> group_by(Cardiometabolic_status) |> count()
   write_tsv(counts_cardiometabolic_status, "results/02-counts_cardiometabolic_status.tsv")
   
   # read otu table 
