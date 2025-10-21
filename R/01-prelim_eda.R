@@ -275,38 +275,6 @@ main <- function(){
   mdl_summary <- as.data.frame(mdl_summary)
   mdl_summary$Variable <- rownames(mdl_summary)
   write_tsv(mdl_summary, "results/05-log_reg_summary.tsv")
-  
-  ### create phyloseq object
-  tree <- read.tree(file = "data/data_processed/tree.nwk")
-  
-  sample <- sample_data(meta_filt)
-  
-  otu_table <- as.data.frame(otu_table)
-  otu_table <- otu_table[, colnames(otu_table) != meta$`#SampleID`[!(meta$`#SampleID` %in% rownames(meta_filt))]]
-  rownames(otu_table) <- otu_table$`#OTU ID`
-  otu_table <- otu_table |> select(-`#OTU ID`)
-  otu_mat <- as.matrix(otu_table)
-  otu_tb <- otu_table(otu_mat, taxa_are_rows = TRUE)
-  
-  taxonomy_mat <- as.data.frame(taxonomy_mat)
-  rownames(taxonomy_mat) <- taxonomy_mat$`Feature ID`
-  taxonomy_mat <- taxonomy_mat[,-1]
-  taxonomy_mat <- as.matrix(taxonomy_mat)
-  taxa_tb <- tax_table(taxonomy_mat)
-  
-  # converting it into the phyloseq object
-  phyloseq_obj <- phyloseq(otu_tb, sample, taxa_tb, tree)
-
-  # keeping bacteria, getting rid of chloroplasts and mitochondria
-  phyloseq_obj <- subset_taxa(phyloseq_obj, Domain == "d__Bacteria" & Class!="c__Chloroplast" & Family !="f__Mitochondria")
-  saveRDS(phyloseq_obj, "data/data_raw/phyloseq_object.rds")
-  
-  # rarecurve plot and rarefying
-  p_rare <- rarecurve(t(as.data.frame(otu_table(phyloseq_obj))), cex = 0.1)
-  ggsave(plot = p_rare,filename =  "results/06-rarecurve.png")
-  # phyloseq_obj_rare <- rarefy_even_depth(phyloseq_obj, sample.size = 1000, rngseed = 1, verbose = TRUE)
-  
-
 }
 
 # helper functions
