@@ -86,9 +86,9 @@ main <- function(){
   p_fiber_sex <- ggplot(meta_rare, aes(x = fiber, fill = sex, color = sex)) +
     geom_histogram(alpha = 0.6) +
     labs(
-      x = "Daily fiber intake (g)",
+      x = "Daily fibre intake (g)",
       y = "Number of people",
-      title = "Fiber Intake Distribution per Sex",
+      title = "Fibre Intake Distribution per Sex",
       color = "Biological Sex",
       fill = "Biological Sex"
     ) +
@@ -110,9 +110,9 @@ main <- function(){
   p_fiber_cv <- ggplot(meta_rare, aes(x = fiber, fill = Cardiometabolic_status, color = Cardiometabolic_status)) +
     geom_histogram(alpha = 0.6) +
     labs(
-      x = "Daily fiber intake (g)",
+      x = "Daily fibre intake (g)",
       y = "Number of people",
-      title = "Fiber Intake Distribution per Cardiometabolic Status",
+      title = "Fibre Intake Distribution per \nCardiometabolic Status",
       color = "Cardiometabolic \nstatus",
       fill = "Cardiometabolic \nstatus"
     ) +
@@ -169,7 +169,7 @@ main <- function(){
     labs(
       x = "Metabolic Equivalent of Task (min/week)",
       y = "Number of people",
-      title = "MET Distribution per Cardiometabolic_status"
+      title = "MET Distribution per \nCardiometabolic status"
     ) +
     theme_classic() +
     scale_color_manual(
@@ -224,7 +224,7 @@ main <- function(){
     labs(
       x = "Adiponectin level (\U00B5g/mL)",
       y = "Number of people",
-      title = "Adiponectin Distribution per Cardiometabolic Status",
+      title = "Adiponectin Distribution per \nCardiometabolic Status",
       color = "Cardiometabolic \nstatus",
       fill = "Cardiometabolic \nstatus"
     ) +
