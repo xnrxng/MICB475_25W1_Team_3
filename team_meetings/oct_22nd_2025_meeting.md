@@ -1,7 +1,7 @@
 # October 22nd 2025 Team 3 Meeting Notes with Chad Poloni
 
 **Agenda:**
-- Review new potential research question: How do dietary fibre intake and exercise affect cardiometabolic health affect the gut microbiota, and is cardiovascular health related to this?
+- Review new potential research question: How do dietary fibre intake and exercise affect cardiometabolic health and does this correspond with unique microbiome profiles?
 - Ask: Do we want to include adiponectin as part of the research question?
 - Ask: Determining samples to keep and samples to discard.
 - Review experimental aims, rationale, and methods:
