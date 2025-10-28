@@ -247,6 +247,17 @@ main <- function(){
   comb_hists <- cowplot::plot_grid(plotlist = plotlist_hist, ncol = 3)
   cowplot::save_plot(plot = comb_hists, "results/07-fiber_met_adi_hists_after_rarefaction.png", base_height = 6, base_width = 12)
   
+  # count number of patients that fall into each group
+  meta_rare <- data.frame(meta_rare)
+  meta_rare_mutated <- meta_rare |>
+    mutate(fibre_group = ifelse(fiber >= 20, "high", "low"),
+           exercise_group = ifelse(MET_mins_per_week > 1000, "high", "low"))
+  
+  meta_counts <- meta_rare_mutated |>
+    group_by(Cardiometabolic_status, fibre_group, exercise_group) |>
+    count()
+  
+  write_tsv(meta_counts, "results/08-cvstatus_fibre_exercise_counts.tsv")
 }
 
 #helper functions
