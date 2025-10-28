@@ -27,5 +27,15 @@
       - Ask: confirm models.
 
 **Meeting notes:**
+- Split groups into high and low fibre with 20 g as the cutoff. Needs justification (men need x and women need y at a certain age, etc).
+- Do the logistic regression first (might do RSLM? instead where CV status would be converted to 0 and 1). Then, do the LASSO at the metadata level. At the end, do the LASSO but with microbial diversity. 
+- Include RDA results to project proposal as a justification of why we chose fibre and exercise. Discuss how to look at fibre in the context of exercise. Main focus should be: if you don't eat fibre but you exercise, does that rescue cardiovascular status, and viceverse? How does it change the gut microbiome?
+- If fibre and exercise do not end up being significant, can explore the other variables that turned out to be significant if there is time.
+- Beta diversity: split cohort into adeqante and inadequate fibre intake, and then into exercise. There should be 4 groups. Do PCoA on that. Look into the literature into what MET distribution is in order to set a good cutoff for the groupings (below a thousand and above a thousand). Do alpha diversity as well.
+- DEA: check if the significant variables in the RDA have an equal distribution (if it's equal/uniform, no need to add it). Include the rest of the significant variables as covariates. Model can be run with multiple comparisons. Can put everything into one model. For instance, do those four groups and see how everything compares to one of the other groups.
+- Point 3 can be ignored. Point 4 move to the top and do the LASSO with OTU table last.
 
 **To do:**
+- Look at the number of samples that would fit into every group.
+- Finish proposal.
+- Prepare meeting agenda for October 29th.
