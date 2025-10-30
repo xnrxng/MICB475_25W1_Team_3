@@ -187,21 +187,21 @@ main <- function(){
     theme(legend.position = "none")
   
   # make histogram of adiponectin distribution colored by sex and cardiovascular health category. add median lines
-  sex_median_values_adi <- meta_rare |>
+  sex_median_values_age <- meta_rare |>
     group_by(sex) |>
-    summarize(median_adi = median(adiponectin, na.rm = TRUE))
+    summarize(median_age = median(age_years, na.rm = TRUE))
   
-  cv_median_values_adi <- meta_rare |>
+  cv_median_values_age <- meta_rare |>
     group_by(Cardiometabolic_status) |>
-    summarize(median_adi = median(adiponectin, na.rm = TRUE))
+    summarize(median_age = median(age_years, na.rm = TRUE))
   
   
-  p_adi_sex <- ggplot(meta_rare, aes(x = adiponectin, fill = sex, color = sex)) +
+  p_age_sex <- ggplot(meta_rare, aes(x = age_years, fill = sex, color = sex)) +
     geom_histogram(alpha = 0.6) +
     labs(
-      x = "Adiponectin level (\U00B5g/mL)",
+      x = "Age (years)",
       y = "Number of people",
-      title = "Adiponectin Distribution per Sex",
+      title = "Age Distribution per Sex",
       color = "Biological Sex",
       fill = "Biological Sex"
     ) +
@@ -210,8 +210,8 @@ main <- function(){
       values = c("male" = "#df8e5f", "female" = "#67dce5")
     ) +
     geom_vline(
-      data = sex_median_values_adi,
-      aes(xintercept = median_adi, color = sex),
+      data = sex_median_values_age,
+      aes(xintercept = median_age, color = sex),
       linetype = "dashed",
       linewidth = 1
     ) +
@@ -219,12 +219,12 @@ main <- function(){
       values = c("male" = "#b35e27", "female" = "#1fa2b3")
     )
   
-  p_adi_cv <- ggplot(meta_rare, aes(x = adiponectin, fill = Cardiometabolic_status, color = Cardiometabolic_status)) +
+  p_age_cv <- ggplot(meta_rare, aes(x = age_years, fill = Cardiometabolic_status, color = Cardiometabolic_status)) +
     geom_histogram(alpha = 0.6) +
     labs(
-      x = "Adiponectin level (\U00B5g/mL)",
+      x = "Age (years)",
       y = "Number of people",
-      title = "Adiponectin Distribution per \nCardiometabolic Status",
+      title = "Age Distribution per \nCardiometabolic Status",
       color = "Cardiometabolic \nstatus",
       fill = "Cardiometabolic \nstatus"
     ) +
@@ -235,17 +235,17 @@ main <- function(){
       values = c("Healthy" = "#B4DC7F", "Abnormal" = "#FFA0AC")
     ) +
     geom_vline(
-      data = cv_median_values_adi,
-      aes(xintercept = median_adi, color = Cardiometabolic_status),
+      data = cv_median_values_age,
+      aes(xintercept = median_age, color = Cardiometabolic_status),
       linetype = "dashed",
       linewidth = 1
     ) +
     theme_classic()
   
   # combine 6 plots into one and save
-  plotlist_hist <- list(p_fiber_sex, p_met_sex, p_adi_sex, p_fiber_cv, p_met_cv, p_adi_cv)
+  plotlist_hist <- list(p_fiber_sex, p_met_sex, p_age_sex, p_fiber_cv, p_met_cv, p_age_cv)
   comb_hists <- cowplot::plot_grid(plotlist = plotlist_hist, ncol = 3)
-  cowplot::save_plot(plot = comb_hists, "results/07-fiber_met_adi_hists_after_rarefaction.png", base_height = 6, base_width = 12)
+  cowplot::save_plot(plot = comb_hists, "results/07-fiber_met_age_hists_after_rarefaction.png", base_height = 6, base_width = 12)
   
   # count number of patients that fall into each group
   meta_rare <- data.frame(meta_rare)
