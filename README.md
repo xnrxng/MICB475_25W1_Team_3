@@ -12,7 +12,7 @@ More information on the contents of this repository is below.
 
 ![](results/gantt_chart.png)
 
-The project's report/digital lab notebook can be found in the `reports/` folder. Available formats are Quarto MarkDown [link], PDF [link], and HTML [link].
+The project's report/digital lab notebook can be found in the `reports/` folder. Available formats are [Quarto MarkDown](https://github.com/xnrxng/MICB475_25W1_Team_3/blob/main/reports/team3_project_report.qmd), [PDF](https://github.com/xnrxng/MICB475_25W1_Team_3/blob/main/reports/team3_project_report.pdf), and [HTML](https://github.com/xnrxng/MICB475_25W1_Team_3/blob/main/reports/team3_project_report.html).
 
 ## Team meetings
 
