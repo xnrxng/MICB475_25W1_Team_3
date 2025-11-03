@@ -8,7 +8,6 @@
 set -euo pipefail
 
 ### activate conda env
-### this script should be run in the server as it takes some absolute paths
 source "$(conda info --base)/etc/profile.d/conda.sh"
 conda activate qiime2-amplicon-2025.4
 
@@ -18,14 +17,15 @@ mkdir -p data/data_processed
 cd data
 
 ### copy metadata file to data_raw
-### 
 # cp /datasets/project_2/colombia/colombia_metadata.txt data_raw
+### copy manifest file to data_raw
+# cp /datasets/project_2/colombia/colombia_manifest.tsv data_raw
 
 ### import data and demultiplex
 qiime tools import \
   --type "SampleData[SequencesWithQuality]" \
   --input-format SingleEndFastqManifestPhred33V2 \
-  --input-path /datasets/project_2/colombia/colombia_manifest.tsv \
+  --input-path data_raw/colombia_manifest.tsv \
   --output-path data_raw/demux_seqs.qza
 
 ### convert into qzv file

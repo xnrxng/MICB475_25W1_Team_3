@@ -2,6 +2,7 @@
 
 # This script processed the FASTQ files using QIIME2
 # Date: October 10th 2025
+# Usage: bash bin/02-qiime2_data_filtering.sh
 
 ### exit on errors
 set -euo pipefail
@@ -24,6 +25,7 @@ qiime feature-table tabulate-seqs \
 --i-data data_processed/rep-seqs.qza \
 --o-visualization data_processed/rep-seqs.qzv
 
+# change the second line to where your classifier .qza file is
 qiime feature-classifier classify-sklearn \
   --i-classifier /datasets/classifiers/silva-138-99-515-806-nb-classifier.qza \
   --i-reads data_processed/rep-seqs.qza \

@@ -25,7 +25,7 @@ Here are the notes and the agenda for every team meeting:
 
 ## Reproducibility
 
-To reproduce the results in this repository, you should have the following set up:
+To reproduce the results FULLY in this repository, you should have the following set up:
 
 1.  Git clone the repository:
 
@@ -47,8 +47,28 @@ To reproduce the results in this repository, you should have the following set u
     conda activate qiime2-amplicon-2025.4
     ```
 
-5.  Have the FASTQ files downloaded (need to add more info to this).
+5.  Have the FASTQ files downloaded. If you do not have them yet, you can run the following:
 
-6.  Have the manifest.tsv file ready (add more info).
+    ``` bash
+    bash bin/0-data_download.sh
+    ```
+
+6.  To process the downloaded sequences with QIIME2, you run:
+
+    ``` bash
+    bash bin/01-qiime2_data_processing.sh
+    ```
+
+    \*Followed by:
+
+    ``` bash
+    bash bin/02-qiime2_data_filtering.sh
+    ```
+
+\*IMPORTANT: please note that running `bash bin/02-qiime2_data_filtering.sh` will give you an error as line 30 expects an absolute path. Please change the absolute path to where your classifier is hosted. The classifier used in this project is SILVA version 138 99% OTUs, trained for the primer pair 515F/806R, which targets the V4 region of the 16S rRNA gene.
 
 After this is set-up, you can re-run ALL the code using `make all` . Please note that this might be a time-consuming and memory-intensive process. We recommend starting a double-pane `tmux` session where `htop` can be run, while `make all` is running.
+
+If you wish to ONLY reproduce the results, after the FASTQ files have already been processed, you can run `make all` directly. You will need to run `make clean` first.
+
+If you encounter any errors, have any questions or suggestions, please make a GitHub issue in the repository.
