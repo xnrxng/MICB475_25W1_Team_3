@@ -8,6 +8,9 @@
 . Remove age_range for RDA?
 - Use Group LASSO or drop categorical variables?
 - Lab notebook format?
+- Updates on aims 2/3?
+- Proposal feedback approximate return date?
+- Post-analysis work/writing/final presentation?
 
 **Meeting notes:**
 
