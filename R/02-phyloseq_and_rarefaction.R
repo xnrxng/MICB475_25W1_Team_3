@@ -260,5 +260,4 @@ main <- function(){
   write_tsv(meta_counts, "results/08-cvstatus_fibre_exercise_counts.tsv")
 }
 
-#helper functions
 main()

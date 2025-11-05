@@ -274,6 +274,4 @@ main <- function(){
   write_tsv(mdl_summary, "results/05-log_reg_summary.tsv")
 }
 
-# helper functions
-
 main()
