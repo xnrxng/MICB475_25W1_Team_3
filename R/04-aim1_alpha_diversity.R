@@ -160,7 +160,7 @@ theme_clean <- theme_bw(base_size = 14) +
   )
 
 # Plot Faith’s PD
-ggplot(meta_pd, aes(x = group, y = PD, fill = group)) +
+gg_final <- ggplot(meta_pd, aes(x = group, y = PD, fill = group)) +
   geom_boxplot() +
   theme_bw() +
   labs(x = "Lifestyle × CV status", y = "Faith's PD") +
@@ -169,7 +169,7 @@ ggsave("results/aim2/alpha_diversity/08-faith_PD_boxplot1.png",
        plot = gg_final, 
        width = 10, height = 6, units = "in", dpi = 300)
 
-ggplot(meta_pd, aes(x = lifestyle_group, y = PD, fill = lifestyle_group)) +
+gg_final2 <- ggplot(meta_pd, aes(x = lifestyle_group, y = PD, fill = lifestyle_group)) +
   geom_boxplot(outlier.shape = 21, color = "black") +
   facet_wrap(~ Cardiometabolic_status, scales = "free_x") +
   scale_fill_viridis_d(option = "C") +
@@ -187,14 +187,14 @@ ggplot(meta_pd, aes(x = lifestyle_group, y = PD, fill = lifestyle_group)) +
     plot.title = element_text(hjust = 0.5, size = 16, face = "bold")
   )
 ggsave("results/aim2/alpha_diversity/09-faith_PD_boxplot2.png", 
-       plot = gg_final, 
+       plot = gg_final2, 
        width = 10, height = 6, units = "in", dpi = 300)
 
 # Boxplot with significance annotations
-ggboxplot(meta_pd, x = "group", y = "PD", 
+gg_final3 <- ggboxplot(meta_pd, x = "group", y = "PD", 
           color = "group", palette = "jco") +
   rotate_x_text(angle = 45) +
   stat_compare_means(method = "kruskal.test")
 ggsave("results/aim2/alpha_diversity/10-kruskal_test_boxplot1.png", 
-       plot = gg_final, 
+       plot = gg_final3, 
        width = 10, height = 6, units = "in", dpi = 300)
