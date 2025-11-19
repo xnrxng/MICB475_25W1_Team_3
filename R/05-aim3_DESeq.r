@@ -114,6 +114,9 @@ EnhancedVolcano(as.data.frame(res),
                 FCcutoff = 1,
                 title = "Abnormal vs Healthy (CV Status)")
 
+#Save the plots
+ggsave("results/aim3/05-DESeq_Volcano_Plot.png", 
+       width = 10, height = 6, units = "in", dpi = 300)
 
 ##Generating bar plot
 ggplot(res, aes(x = reorder(Label, log2FoldChange), y = log2FoldChange, fill = log2FoldChange > 0)) +
@@ -126,9 +129,6 @@ ggplot(res, aes(x = reorder(Label, log2FoldChange), y = log2FoldChange, fill = l
        fill = "Direction") +
   theme_minimal(base_size = 8)
 
-#Save the plots
-ggsave("results/aim3/01-DESeq_Volcano_Plot.png", 
-       width = 10, height = 6, units = "in", dpi = 300)
-
-ggsave("results/aim3/02-DESeq_Log2_Fold_Change_Plot.png", 
+#Save the plot
+ggsave("results/aim3/06-DESeq_Log2_Fold_Change_Plot.png", 
        width = 10, height = 6, units = "in", dpi = 300)
