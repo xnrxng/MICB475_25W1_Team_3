@@ -119,10 +119,34 @@ table(meta_pd$Cardiometabolic_status)
 meta_pd$group <- paste(meta_pd$lifestyle_group, meta_pd$Cardiometabolic_status, sep = "_")
 table(meta_pd$group)  # Check counts for each of 8 groups
 
+# Save data
+saveRDS(meta_pd, "results/aim2/alpha_diversity/meta_pd_faith_pd.rds")
+write_tsv(meta_pd, "results/aim2/alpha_diversity/meta_pd_faith_pd.tsv")
+saveRDS(faith_pd, "results/aim2/alpha_diversity/faith_pd.rds")
+write_tsv(faith_pd, "results/aim2/alpha_diversity/faith_pd.tsv")
+
 # Kruskal-Wallis test
 kruskal.test(PD ~ group, data = meta_pd)
 pairwise.wilcox.test(meta_pd$PD, meta_pd$group, 
                      p.adjust.method = "BH")  # Benjamini-Hochberg correction
+# Save data
+kw_res <- kruskal.test(PD ~ group, data = meta_pd)
+saveRDS(kw_res, "results/aim2/alpha_diversity/kruskal_wallis_group.rds")
+# Also save a tidy summary
+kw_summary <- data.frame(
+  statistic = kw_res$statistic,
+  df = kw_res$parameter,
+  p_value = kw_res$p.value
+)
+write_tsv(kw_summary, "results/aim2/alpha_diversity/kruskal_wallis_group.tsv")
+# More saving
+pairwise_res <- pairwise.wilcox.test(meta_pd$PD, meta_pd$group, p.adjust.method = "BH")
+saveRDS(pairwise_res, "results/aim2/alpha_diversity/pairwise_wilcox_group.rds")
+# Tidy version for easier reading
+pairwise_df <- as.data.frame(pairwise_res$p.value) %>%
+  tibble::rownames_to_column("Group1")
+write_tsv(pairwise_df, "results/aim2/alpha_diversity/pairwise_wilcox_group.tsv")
+
 # Boxplot with significance annotations
 ggboxplot(meta_pd, x = "group", y = "PD", 
           color = "group", palette = "jco") +
@@ -135,4 +159,3 @@ ggplot(meta_pd, aes(x = group, y = PD, fill = group)) +
   theme_bw() +
   labs(x = "Lifestyle × CV status", y = "Faith's PD") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
-
