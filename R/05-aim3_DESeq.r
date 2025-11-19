@@ -125,3 +125,10 @@ ggplot(res, aes(x = reorder(Label, log2FoldChange), y = log2FoldChange, fill = l
        y = "log2 Fold Change (Abnormal vs Healthy)",
        fill = "Direction") +
   theme_minimal(base_size = 8)
+
+#Save the plots
+ggsave("results/aim3/01-DESeq_Volcano_Plot.png", 
+       width = 10, height = 6, units = "in", dpi = 300)
+
+ggsave("results/aim3/02-DESeq_Log2_Fold_Change_Plot.png", 
+       width = 10, height = 6, units = "in", dpi = 300)
