@@ -10,6 +10,8 @@ library(ape)
 library(picante)
 library(ggplot2)
 library(cowplot)
+library(phangorn)
+library(phytools)
 set.seed(2025)
 
 # Read data
@@ -49,5 +51,45 @@ phyloseq_obj <- subset_taxa(phyloseq_obj, Domain == "d__Bacteria" & Class!="c__C
 OTU <- as.data.frame(otu_table(phyloseq_obj))
 TREE <- phy_tree(phyloseq_obj)
 
+# Resolve polytomies (make the tree dichotomous)
+TREE_dich <- ape::multi2di(TREE)
+# Check if branch lengths exist
+head(TREE_dich$edge.length)
+# Force ultrametric
+ape::is.ultrametric(TREE_dich)
+TREE_ultra <- ape::compute.brlen(TREE_dich, method = "Grafen")
+
+# Ensure tree is rooted
+TREE_rooted <- ape::root(TREE_dich, outgroup = TREE_dich$tip.label[1], resolve.root = TRUE)
+# Make it fully bifurcating
+TREE_rooted_dich <- ape::multi2di(TREE_rooted)
+# Use phytools::chronos() clone = chronopl (so install + use phytools)
+TREE_ultra <- phytools::chronopl(TREE_rooted_dich, lambda = 1)
+
+# Ensure tree is dichotomous
+TREE_dich <- ape::multi2di(TREE_rooted_dich)
+# Apply Grafen branch lengths
+TREE_ultra <- ape::compute.brlen(TREE_dich, method = "Grafen")
+# Check
+ape::is.ultrametric(TREE_ultra)
+# Fix zero-length branches
+TREE_ultra$edge.length[TREE_ultra$edge.length == 0] <- 1e-6
+
+# Compute node ages using branching.times()
+node_ages <- ape::branching.times(TREE_ultra)
+# Attach ages to the tree for picante
+ntip  <- length(TREE_ultra$tip.label)
+nnode <- TREE_ultra$Nnode
+TREE_ultra$ages <- c(
+  rep(0, ntip),    # Tips have age 0
+  node_ages        # Internal nodes get branching times
+)
+names(TREE_ultra$ages) <- 1:(ntip + nnode)
+
+# Fix the OTU table orientation
+OTU_pd <- as.data.frame(t(OTU))
+# Check that columns = taxa
+all(colnames(OTU_pd) == TREE_ultra$tip.label)
 # Calculate Faith’s PD
-faith_pd <- picante::pd(OTU, TREE, include.root = TRUE)
+faith_pd <- picante::pd(OTU_pd, TREE_ultra, include.root = TRUE)
+
