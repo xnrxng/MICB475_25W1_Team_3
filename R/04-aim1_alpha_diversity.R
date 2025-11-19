@@ -158,11 +158,6 @@ theme_clean <- theme_bw(base_size = 14) +
     legend.text = element_text(size = 11),
     plot.title = element_text(hjust = 0.5, size = 16, face = "bold")
   )
-# Boxplot with significance annotations
-ggboxplot(meta_pd, x = "group", y = "PD", 
-          color = "group", palette = "jco") +
-  rotate_x_text(angle = 45) +
-  stat_compare_means(method = "kruskal.test")
 
 # Plot Faith’s PD
 ggplot(meta_pd, aes(x = group, y = PD, fill = group)) +
@@ -170,6 +165,9 @@ ggplot(meta_pd, aes(x = group, y = PD, fill = group)) +
   theme_bw() +
   labs(x = "Lifestyle × CV status", y = "Faith's PD") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
+ggsave("results/aim2/alpha_diversity/08-faith_PD_boxplot1.png", 
+       plot = gg_final, 
+       width = 10, height = 6, units = "in", dpi = 300)
 
 ggplot(meta_pd, aes(x = lifestyle_group, y = PD, fill = lifestyle_group)) +
   geom_boxplot(outlier.shape = 21, color = "black") +
@@ -188,6 +186,15 @@ ggplot(meta_pd, aes(x = lifestyle_group, y = PD, fill = lifestyle_group)) +
     legend.position = "none",
     plot.title = element_text(hjust = 0.5, size = 16, face = "bold")
   )
-ggsave("results/aim2/alpha_diversity/08-faith_PD_boxplot.png", 
+ggsave("results/aim2/alpha_diversity/09-faith_PD_boxplot2.png", 
+       plot = gg_final, 
+       width = 10, height = 6, units = "in", dpi = 300)
+
+# Boxplot with significance annotations
+ggboxplot(meta_pd, x = "group", y = "PD", 
+          color = "group", palette = "jco") +
+  rotate_x_text(angle = 45) +
+  stat_compare_means(method = "kruskal.test")
+ggsave("results/aim2/alpha_diversity/10-kruskal_test_boxplot1.png", 
        plot = gg_final, 
        width = 10, height = 6, units = "in", dpi = 300)
