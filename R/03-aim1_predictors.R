@@ -22,6 +22,7 @@ library(vegan)
 library(ape)
 library(phyloseq)
 library(pheatmap)
+library(ggordiplots)
 set.seed(2025)
 
 main <- function(){
@@ -73,10 +74,10 @@ main <- function(){
   rownames(phylum_tb) <- tax_table_data[, "Phylum"] |> as.vector()
   phylum_tb <- as.data.frame(phylum_tb)
   
-  # remove country bc it's only 1 level, latitude as well bc it's redundant
+  # remove country bc it's only 1 level, latitude and age range as well bc it's redundant
   meta <- sample_data(ps_phylum)
   meta <- data.frame(meta)
-  meta <- meta |> select(-country, -latitude)
+  meta <- meta |> select(-country, -latitude, -age_range)
   
   # make sure rows are in the same order
   phylum_tb <- t(phylum_tb)
@@ -94,24 +95,82 @@ main <- function(){
   
   write_tsv(anova_rda, "results/aim1/04-rda_coefficients.tsv")
   
+  #refit significant variables with adonis2
+  adonis <- adonis2(otu_hel ~ city + stool_consistency+adiponectin + Calorie_intake + BMI + fiber, data = meta, by = "terms")
+  adonis <- rownames_to_column(adonis, var = "variable")
+  write_tsv(adonis, "results/aim1/05-adonis_sig_rda.tsv")
+  
+  # ordination plots
+  meta <- meta |>
+    mutate(fibre_group = ifelse(fiber >= 20, "high", "low"),
+           exercise_group = ifelse(MET_mins_per_week > 1000, "high", "low"),
+           fibre_exercise_group = paste(fibre_group, exercise_group, sep = "_"))
+  
+  ggordi <- gg_ordiplot(
+    ord = rda_model, 
+    groups = meta$fibre_exercise_group, 
+    kind = "se", 
+    conf = 0.95,
+    pt.size = 2, 
+    plot = TRUE
+  )
+  
+  p <- ggordi$plot +
+    labs(
+      title = "Phylum - RDA",
+      subtitle = "Displaying standard error ellipses") +
+    theme_classic()+
+    scale_color_discrete(labels = c(
+      "high_high" = "High fibre + high exercise",
+      "high_low"  = "High fibre + low exercise",
+      "low_high"  = "Low fibre + high exercise",
+      "low_low"   = "Low fibre + low exercise"
+    ))
+  
+  ggsave(plot = p, filename = "results/aim1/06-ordination_plot.png", width = 8, height = 5)
+  
   ############ LASSO
   # correlation heatmap
   meta_cor <- meta |>
-    select(-age_range, -BMI_class, -Cardiometabolic_status, -city, -medication, -sex, -smoker, -stool_consistency)
+    select(-fibre_group, -exercise_group, -fibre_exercise_group, -BMI_class, -Cardiometabolic_status, -city, -medication, -sex, -smoker, -stool_consistency)
 
   cor_matrix <- cor(meta_cor, use = "pairwise.complete.obs", method = "spearman")
+  
+  p_matrix <- matrix(NA, nrow = ncol(meta_cor), ncol = ncol(meta_cor))
+  rownames(p_matrix) <- colnames(meta_cor)
+  colnames(p_matrix) <- colnames(meta_cor)
+  
+  for (i in 1:ncol(meta_cor)) {
+    for (j in 1:ncol(meta_cor)) {
+      p_matrix[i, j] <- get_p(meta_cor[, i], meta_cor[, j])
+    }
+  }
+  
+  stars_matrix <- ifelse(p_matrix <= 0.001, "***",
+                         ifelse(p_matrix <= 0.05, "**",
+                                ifelse(p_matrix <= 0.1, "*",
+                                       "")))
+  
 
-  png("results/aim1/0-heatmap_num_variables.png",width = 11.75, height = 9.52, units = "in", res = 300)
-  pheatmap(cor_matrix,
-           cluster_rows = FALSE,
-           cluster_cols = FALSE,
-           main = "Heatmap of Metadata Numeric Variables")
+  png("results/aim1/0-heatmap_num_variables.png",
+      width = 11.75, height = 9.52, units = "in", res = 300)
+  
+  pheatmap(
+    cor_matrix,
+    cluster_rows = FALSE,
+    cluster_cols = FALSE,
+    display_numbers = stars_matrix,
+    number_color = "black",
+    fontsize_number = 12,
+    main = "Heatmap of Metadata Numeric Variables (Spearman correlation)"
+  )
+  
   dev.off()
   
   # mutating cv to "0" or "1". select numeric variables only
   meta_logistic <- meta |>
     mutate(Cardiometabolic_status = ifelse(Cardiometabolic_status == "Healthy", 0, 1))|>
-    select(-age_range, -BMI_class, -city, -medication, -sex, -smoker, -stool_consistency)
+    select(-fibre_group, -exercise_group, -fibre_exercise_group, -BMI_class, -city, -medication, -sex, -smoker, -stool_consistency)
   
   # splitting the data into a model selection and an inference set
   meta_split <- initial_split(meta_logistic, prop = 0.5, strata = Cardiometabolic_status)
@@ -133,10 +192,7 @@ main <- function(){
       type.measure = "auc",
       nfolds = 10)
   
-  # for visualizing the dimensions of the plots.
-  options(repr.plot.width = 8, repr.plot.height = 8)
-  
-  png("results/aim1/05-lasso_crossvalidation.png")
+  png("results/aim1/07-lasso_crossvalidation.png", width = 10, height = 10, units = "in", res = 300)
   plot(meta_model, main = "Cross-Validation with LASSO\n\n")
   dev.off()
   
@@ -174,7 +230,7 @@ main <- function(){
   lasso_log_results <- tidy(lasso_log, exponentiate = TRUE, conf.int = TRUE) |>
     mutate_if(is.numeric, round, 3)
   
-  write_tsv(lasso_log_results, "results/aim1/06-lasso_hypothesis_testing.tsv")
+  write_tsv(lasso_log_results, "results/aim1/08-lasso_hypothesis_testing.tsv")
   
   # prediction
   # create new model matrix for prediction:
@@ -195,7 +251,7 @@ main <- function(){
       positive = "1"
     )
   
-  saveRDS(confusion_matrix, "results/aim1/07-lasso_confusion_matrix.rds")
+  saveRDS(confusion_matrix, "results/aim1/09-lasso_confusion_matrix.rds")
   
   # get ROC 
   ROC_lasso <- 
@@ -204,10 +260,17 @@ main <- function(){
       predictor = predict(lasso_model,
                           newx = model_matrix_X_test)[,"s0"]) 
   
-  png("results/aim1/08-lasso_roc_curve.png")
-  plot(ROC_lasso, main = "ROC Curve for Breast Cancer Dataset", print.auc = TRUE)
+  png("results/aim1/10-lasso_roc_curve.png", width = 10, height = 10, units = "in", res = 300)
+  plot(ROC_lasso, main = "ROC Curve for Selected LASSO Model", print.auc = TRUE)
   dev.off()
 }
+
+# helper functions
+get_p <- function(x, y) {
+  tmp <- cor.test(x, y, method = "spearman", exact = FALSE)
+  tmp$p.value
+}
+
 
 main()
 

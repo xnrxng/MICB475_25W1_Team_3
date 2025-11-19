@@ -1,0 +1,8 @@
+Group1	adequate fibre;high exercise_Abnormal	adequate fibre;high exercise_Healthy	adequate fibre;low exercise_Abnormal	adequate fibre;low exercise_Healthy	inadequate fibre;high exercise_Abnormal	inadequate fibre;high exercise_Healthy	inadequate fibre;low exercise_Abnormal
+adequate fibre;high exercise_Healthy	0.2957946494333696	NA	NA	NA	NA	NA	NA
+adequate fibre;low exercise_Abnormal	0.6507254420360485	0.9028916491868487	NA	NA	NA	NA	NA
+adequate fibre;low exercise_Healthy	0.6507254420360485	0.9122965881866468	0.8373654562801196	NA	NA	NA	NA
+inadequate fibre;high exercise_Abnormal	0.9122965881866468	0.2957946494333696	0.771040650069336	0.6564887605845016	NA	NA	NA
+inadequate fibre;high exercise_Healthy	0.39385418252830834	0.8373654562801196	0.8211022237340404	0.9516659014760862	0.307241907313914	NA	NA
+inadequate fibre;low exercise_Abnormal	0.6507254420360485	0.8211022237340404	0.955680207162246	0.9304010190577136	0.6507254420360485	0.9304010190577136	NA
+inadequate fibre;low exercise_Healthy	0.6665214759772071	0.2957946494333696	0.6507254420360485	0.5246643728290001	0.6564887605845016	0.2957946494333696	0.3794662458628558
