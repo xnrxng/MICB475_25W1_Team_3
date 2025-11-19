@@ -12,6 +12,8 @@ library(ggplot2)
 library(cowplot)
 library(phangorn)
 library(phytools)
+library(dplyr)
+library(ggpubr)
 set.seed(2025)
 
 # Read data
@@ -90,6 +92,47 @@ names(TREE_ultra$ages) <- 1:(ntip + nnode)
 OTU_pd <- as.data.frame(t(OTU))
 # Check that columns = taxa
 all(colnames(OTU_pd) == TREE_ultra$tip.label)
-# Calculate Faith’s PD
+# Calculate Faith’s PD (data frame (faith_pd) with Faith’s PD for each sample (rows correspond to samples, columns include PD and SR: species richness))
 faith_pd <- picante::pd(OTU_pd, TREE_ultra, include.root = TRUE)
+
+# Merge faith_pd with metadata
+meta$SampleID <- meta$X.SampleID
+faith_pd$SampleID <- rownames(faith_pd)
+meta_pd <- merge(meta, faith_pd, by = "SampleID")
+nrow(meta_pd)  # Should now match number of samples
+
+# Create the lifestyle_group column
+meta_pd <- meta_pd %>%
+  mutate(
+    lifestyle_group = case_when(
+      fiber >= 20 & MET_mins_per_week >= 1000 ~ "adequate fibre;high exercise",
+      fiber >= 20 & MET_mins_per_week < 1000  ~ "adequate fibre;low exercise",
+      fiber < 20  & MET_mins_per_week >= 1000 ~ "inadequate fibre;high exercise",
+      TRUE ~ "inadequate fibre;low exercise"
+    )
+  )
+# Check if it worked
+table(meta_pd$lifestyle_group)
+# Make sure CV_status exists
+table(meta_pd$Cardiometabolic_status)
+# Create the 8-group factor
+meta_pd$group <- paste(meta_pd$lifestyle_group, meta_pd$Cardiometabolic_status, sep = "_")
+table(meta_pd$group)  # Check counts for each of 8 groups
+
+# Kruskal-Wallis test
+kruskal.test(PD ~ group, data = meta_pd)
+pairwise.wilcox.test(meta_pd$PD, meta_pd$group, 
+                     p.adjust.method = "BH")  # Benjamini-Hochberg correction
+# Boxplot with significance annotations
+ggboxplot(meta_pd, x = "group", y = "PD", 
+          color = "group", palette = "jco") +
+  rotate_x_text(angle = 45) +
+  stat_compare_means(method = "kruskal.test")
+
+# Plot Faith’s PD
+ggplot(meta_pd, aes(x = group, y = PD, fill = group)) +
+  geom_boxplot() +
+  theme_bw() +
+  labs(x = "Lifestyle × CV status", y = "Faith's PD") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
