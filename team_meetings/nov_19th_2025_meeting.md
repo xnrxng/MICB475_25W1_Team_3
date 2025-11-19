@@ -3,7 +3,7 @@
 **Agenda:**
 
 - Discuss Aim 2 results -> alpha diversity, preliminary beta diversity
-- Discuss Aim 3 results, LASSO
+- Discuss Aim 3 results, LASSO and DESeq
 - Can re-discuss aim 1 new results
 
 **Meeting notes:**
