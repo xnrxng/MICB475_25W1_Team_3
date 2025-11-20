@@ -34,8 +34,11 @@ qiime tools export \
 conda deactivate
 conda activate picrust2
 
+mkdir -p results/aim4/
+
 ### run picrust
 picrust2_pipeline.py \
-   -s picrust/dna-sequences.fasta \
-   -i picrust/feature-table.biom \
-   -o picrust_out
+    -s data/data_processed/picrust/dna-sequences.fasta \
+    -i data/data_processed/picrust/feature-table.biom \
+    -o results/aim4/picrust_out
+
