@@ -65,6 +65,18 @@ To reproduce the results FULLY in this repository, you should have the following
     bash bin/02-qiime2_data_filtering.sh
     ```
 
+7.  To run the PICRUST2 analysis, create the conda environment:
+
+    ``` bash
+    conda env create -f picrust2_env.yml
+    ```
+
+    Followed by:
+
+    ``` bash
+    bash bin/03-piicrust.sh
+    ```
+
 \*IMPORTANT: please note that running `bash bin/02-qiime2_data_filtering.sh` will give you an error as line 30 expects an absolute path. Please change the absolute path to where your classifier is hosted. The classifier used in this project is SILVA version 138 99% OTUs, trained for the primer pair 515F/806R, which targets the V4 region of the 16S rRNA gene.
 
 After this is set-up, you can re-run ALL the code using `make all` . Please note that this might be a time-consuming and memory-intensive process. We recommend starting a double-pane `tmux` session where `htop` can be run, while `make all` is running.
