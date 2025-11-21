@@ -26,3 +26,4 @@ data/data_processed/rep-seqs.qza
 data/data_processed/stats.qza
 data/data_processed/taxonomy.qza
 Miniconda3-latest-MacOSX-arm64.sh
+team03_out/intermediate

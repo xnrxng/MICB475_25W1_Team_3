@@ -40,5 +40,4 @@ mkdir -p results/aim4/
 picrust2_pipeline.py \
     -s data/data_processed/picrust/dna-sequences.fasta \
     -i data/data_processed/picrust/feature-table.biom \
-    -o results/aim4/picrust_out
-
+    -o data/data_processed/picrust/team03_out
