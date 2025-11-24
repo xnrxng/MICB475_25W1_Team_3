@@ -21,7 +21,7 @@ set.seed(2025)
 
 main <- function(){
 # Read data
-  phyloseq_obj <- readRDS("data/data_processed/phyloseq_obj_rarefied.rds")
+phyloseq_obj <- readRDS("data/data_processed/phyloseq_obj_rarefied.rds")
 
 # Extract required components
 OTU <- as.data.frame(otu_table(phyloseq_obj))
@@ -163,5 +163,23 @@ ggsave("results/aim2/alpha_diversity/06-faith_PD_boxplot.png",
        plot = bp, 
        width = 10, height = 6, units = "in", dpi = 300)
 }
+
+
+shannon_df <- phyloseq::estimate_richness(phyloseq_obj, measures = "Shannon")
+# estimate_richness returns a data.frame with rownames = sample IDs, column "Shannon"
+shannon_df <- tibble::rownames_to_column(shannon_df, var = "SampleID")
+# Keep only the Shannon column
+shannon_df <- shannon_df[, c("SampleID", "Shannon")]
+
+# Ensure SampleID columns are character
+meta_pd$SampleID <- as.character(meta_pd$X.SampleID)
+shannon_df$SampleID <- as.character(shannon_df$X.SampleID)
+
+# Merge (inner join)
+meta_pd <- dplyr::left_join(meta_pd, shannon_df, by = "SampleID")
+
+# Check
+dplyr::glimpse(meta_pd)
+table(is.na(meta_pd$Shannon))   # should be 0 FALSE ideally
 
 main()
