@@ -78,7 +78,7 @@ main <- function(){
       type.measure = "auc",
       nfolds = 10)
   
-  png("results/aim3/01-lasso_crossvalidation.png", width = 10, height = 10, units = "in", res = 300)
+  png("results/aim3/LASSO/01-lasso_crossvalidation.png", width = 10, height = 10, units = "in", res = 300)
   plot(meta_model, main = "Cross-Validation with LASSO\n\n")
   dev.off()
   
@@ -116,7 +116,7 @@ main <- function(){
   lasso_log_results <- tidy(lasso_log, exponentiate = TRUE, conf.int = TRUE) |>
     mutate_if(is.numeric, round, 3)
   
-  write_tsv(lasso_log_results, "results/aim3/02-lasso_hypothesis_testing.tsv")
+  write_tsv(lasso_log_results, "results/aim3/LASSO/02-lasso_hypothesis_testing.tsv")
   
   # prediction
   # create new model matrix for prediction:
@@ -137,7 +137,7 @@ main <- function(){
       positive = "1"
     )
   
-  saveRDS(confusion_matrix, "results/aim3/03-lasso_confusion_matrix.rds")
+  saveRDS(confusion_matrix, "results/aim3/LASSO/03-lasso_confusion_matrix.rds")
   
   # get ROC 
   ROC_lasso <- 
@@ -146,7 +146,7 @@ main <- function(){
       predictor = predict(lasso_model,
                           newx = model_matrix_X_test)[,"s0"]) 
   
-  png("results/aim3/4-lasso_roc_curve.png", width = 10, height = 10, units = "in", res = 300)
+  png("results/aim3/LASSO/04-lasso_roc_curve.png", width = 10, height = 10, units = "in", res = 300)
   plot(ROC_lasso, main = "ROC Curve for Selected LASSO Model", print.auc = TRUE)
   dev.off()
   
