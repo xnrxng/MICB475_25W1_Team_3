@@ -1,6 +1,6 @@
 # This script performs alpha diversity for aim 2.
 # Date: November 15th 2025
-# Usage: Rscript R/04-aim1_alpha_diversity.R
+# Usage: Rscript R/04-aim2_alpha_diversity.R
 
 # Load the libraries
 library(tidyverse)
@@ -19,7 +19,7 @@ library(RColorBrewer)
 library(ggsignif)
 set.seed(2025)
 
-main <- function(){}
+main <- function(){
 # Read data
 phyloseq_obj <- readRDS("data/data_processed/phyloseq_obj_rarefied.rds")
 
@@ -162,8 +162,8 @@ bp <- ggplot(meta_pd, aes(x = lifestyle_group, y = PD, fill = lifestyle_group)) 
 ggsave("results/aim2/alpha_diversity/06-faith_PD_boxplot.png", 
        plot = bp, 
        width = 10, height = 6, units = "in", dpi = 300)
-}
 
+################################################################################################
 # Calculate Shannon's
 shannon_df <- phyloseq::estimate_richness(phyloseq_obj, measures = "Shannon")
 # Estimate_richness returns a data.frame with rownames = sample IDs, column "Shannon"
@@ -179,8 +179,8 @@ shannon_df$SampleID <- as.character(shannon_df$SampleID)
 meta_pd <- dplyr::left_join(meta_pd, shannon_df, by = "SampleID")
 
 # Check
-dplyr::glimpse(meta_pd)
-table(is.na(meta_pd$Shannon))   # should be 0 FALSE ideally
+#dplyr::glimpse(meta_pd)
+#table(is.na(meta_pd$Shannon))   # should be 0 FALSE ideally
 
 # Kruskal-Wallis test
 healthy_pd <- meta_pd |>
@@ -217,6 +217,11 @@ pairwise_shannon_df <- as.data.frame(pairwise_shannon$p.value) |>
 write_tsv(pairwise_shannon_df, "results/aim2/alpha_diversity/09-pairwise_wilcox_group2.tsv")
 
 # Boxplot
+kw_summary2 <- kw_summary2 |>
+  mutate(label = paste0("KW p = ", signif(p_value, 3)))
+
+kw_summary2$Cardiometabolic_status <- c("Healthy", "Abnormal")
+
 bp2 <- ggplot(meta_pd, aes(x = lifestyle_group, y = Shannon, fill = lifestyle_group)) +
   geom_boxplot(outlier.shape = 21, color = "black") +
   facet_wrap(~ Cardiometabolic_status, scales = "free_x") +
@@ -244,7 +249,7 @@ bp2 <- ggplot(meta_pd, aes(x = lifestyle_group, y = Shannon, fill = lifestyle_gr
   )) +
   geom_text(
     data = kw_summary2,
-    aes(x = -Inf, y = Inf, label = p_value),
+    aes(x = -Inf, y = Inf, label = label),
     inherit.aes = FALSE,
     hjust = -0.1,
     vjust = 1.2,
@@ -253,7 +258,7 @@ bp2 <- ggplot(meta_pd, aes(x = lifestyle_group, y = Shannon, fill = lifestyle_gr
 
 # Save
 ggsave("results/aim2/alpha_diversity/10-Shannon_boxplot.png", 
-       plot = bp, 
+       plot = bp2, 
        width = 10, height = 6, units = "in", dpi = 300)
 }
 
