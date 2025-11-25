@@ -19,7 +19,7 @@ library(RColorBrewer)
 library(ggsignif)
 set.seed(2025)
 
-main <- function(){
+main <- function(){}
 # Read data
 phyloseq_obj <- readRDS("data/data_processed/phyloseq_obj_rarefied.rds")
 
@@ -93,7 +93,7 @@ abnormal_pd <- meta_pd |>
   filter(Cardiometabolic_status == "Abnormal")
 kw_res_abnormal <- kruskal.test(PD ~ group, data = abnormal_pd)
 
-# save a tidy summary
+# Save a tidy summary
 kw_summary_healthy <- data.frame(
   statistic = kw_res_healthy$statistic,
   df = kw_res_healthy$parameter,
@@ -119,7 +119,7 @@ pairwise_df <- as.data.frame(pairwise_res$p.value) |>
   tibble::rownames_to_column("Group1")
 write_tsv(pairwise_df, "results/aim2/alpha_diversity/05-pairwise_wilcox_group.tsv")
 
-# boxplot
+# Boxplot
 kw_summary <- kw_summary |>
   mutate(label = paste0("KW p = ", signif(p_value, 3)))
 
@@ -158,22 +158,22 @@ bp <- ggplot(meta_pd, aes(x = lifestyle_group, y = PD, fill = lifestyle_group)) 
     vjust = 1.2,
     size = 4
   ) 
-
+# Save
 ggsave("results/aim2/alpha_diversity/06-faith_PD_boxplot.png", 
        plot = bp, 
        width = 10, height = 6, units = "in", dpi = 300)
 }
 
-
+# Calculate Shannon's
 shannon_df <- phyloseq::estimate_richness(phyloseq_obj, measures = "Shannon")
-# estimate_richness returns a data.frame with rownames = sample IDs, column "Shannon"
+# Estimate_richness returns a data.frame with rownames = sample IDs, column "Shannon"
 shannon_df <- tibble::rownames_to_column(shannon_df, var = "SampleID")
 # Keep only the Shannon column
 shannon_df <- shannon_df[, c("SampleID", "Shannon")]
 
 # Ensure SampleID columns are character
-meta_pd$SampleID <- as.character(meta_pd$X.SampleID)
-shannon_df$SampleID <- as.character(shannon_df$X.SampleID)
+meta_pd$SampleID <- as.character(meta_pd$SampleID)
+shannon_df$SampleID <- as.character(shannon_df$SampleID)
 
 # Merge (inner join)
 meta_pd <- dplyr::left_join(meta_pd, shannon_df, by = "SampleID")
@@ -181,5 +181,80 @@ meta_pd <- dplyr::left_join(meta_pd, shannon_df, by = "SampleID")
 # Check
 dplyr::glimpse(meta_pd)
 table(is.na(meta_pd$Shannon))   # should be 0 FALSE ideally
+
+# Kruskal-Wallis test
+healthy_pd <- meta_pd |>
+  filter(Cardiometabolic_status == "Healthy")
+kw_shannon_healthy <- kruskal.test(Shannon ~ group, data = healthy_pd)
+
+abnormal_pd <- meta_pd |>
+  filter(Cardiometabolic_status == "Abnormal")
+kw_shannon_abnormal <- kruskal.test(Shannon ~ group, data = abnormal_pd)
+
+# Save a tidy summary
+kw_summary_healthy2 <- data.frame(
+  statistic = kw_shannon_healthy$statistic,
+  df = kw_shannon_healthy$parameter,
+  p_value = kw_shannon_healthy$p.value
+)
+
+kw_summary_abnormal2 <- data.frame(
+  statistic = kw_shannon_abnormal$statistic,
+  df = kw_shannon_abnormal$parameter,
+  p_value = kw_shannon_abnormal$p.value
+)
+
+kw_summary2 <- rbind(kw_summary_healthy2, kw_summary_abnormal2)
+rownames(kw_summary2) <- c("healthy", "abnormal")
+write_tsv(kw_summary2, "results/aim2/alpha_diversity/07-kruskal_wallis_group2.tsv")
+
+# More saving
+pairwise_shannon <- pairwise.wilcox.test(meta_pd$Shannon, meta_pd$group, p.adjust.method = "BH")
+saveRDS(pairwise_shannon, "results/aim2/alpha_diversity/08-pairwise_wilcox_group2.rds")
+# Tidy version for easier reading
+pairwise_shannon_df <- as.data.frame(pairwise_shannon$p.value) |>
+  tibble::rownames_to_column("Group1")
+write_tsv(pairwise_shannon_df, "results/aim2/alpha_diversity/09-pairwise_wilcox_group2.tsv")
+
+# Boxplot
+bp2 <- ggplot(meta_pd, aes(x = lifestyle_group, y = Shannon, fill = lifestyle_group)) +
+  geom_boxplot(outlier.shape = 21, color = "black") +
+  facet_wrap(~ Cardiometabolic_status, scales = "free_x") +
+  labs(
+    x = NULL,
+    y = "Shannon diversity (H')",
+    title = "Shannon diversity by Lifestyle and CV Status"
+  ) +
+  theme_minimal() +
+  theme(
+    panel.border = element_rect(color = "black", fill = NA),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.line = element_line(colour = "black"),
+    panel.spacing = unit(0, "lines"),
+    legend.position = "none",
+    plot.margin = margin(10, 10, 10, 10)) +
+  scale_fill_brewer(
+    palette = "Set2")+
+  scale_x_discrete(labels = c(
+    "adequate fibre;high exercise"    = "High fibre\nHigh exercise",
+    "adequate fibre;low exercise"     = "High fibre\nLow exercise",
+    "inadequate fibre;high exercise"  = "Low fibre\nHigh exercise",
+    "inadequate fibre;low exercise"   = "Low fibre\nLow exercise"
+  )) +
+  geom_text(
+    data = kw_summary2,
+    aes(x = -Inf, y = Inf, label = p_value),
+    inherit.aes = FALSE,
+    hjust = -0.1,
+    vjust = 1.2,
+    size = 4
+  ) 
+
+# Save
+ggsave("results/aim2/alpha_diversity/10-Shannon_boxplot.png", 
+       plot = bp, 
+       width = 10, height = 6, units = "in", dpi = 300)
+}
 
 main()
