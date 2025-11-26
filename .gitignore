@@ -17,13 +17,10 @@ MICB475_25W1_Team_3.Rproj
 # Data
 data/data_raw/demux_seqs.qza
 data/data_processed/aligned-rep-seqs.qza
-data/data_processed/table.qza
 data/data_processed/unrooted-tree.qza
 data/data_processed/masked-aligned-rep-seqs.qza
-data/data_processed/rooted-tree.qza
 data/data_processed/feature-table.biom
 data/data_processed/rep-seqs.qza
 data/data_processed/stats.qza
-data/data_processed/taxonomy.qza
 Miniconda3-latest-MacOSX-arm64.sh
 team03_out/intermediate
