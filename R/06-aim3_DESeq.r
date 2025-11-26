@@ -16,7 +16,7 @@ set.seed(2025)
 #read data
 main <- function(){
   # Read in data
-  phyloseq_obj <- readRDS("data/data_processed/phyloseq_obj_rarefied.rds")
+  phyloseq_obj <- readRDS("data/data_raw/phyloseq_object.rds.rds")
   
   #rewrite metadata
   meta <- sample_data(phyloseq_obj)
