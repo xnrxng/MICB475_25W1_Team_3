@@ -2,11 +2,10 @@
 
 **Agenda:**
 
-- 
+-   Discuss DRAFT slides.
+-   Discuss Picrust2 results.
+-   What is an appropriate title? What is our story?
 
 **Meeting notes:**
-- 
 
 **To do:**
-- 
-
