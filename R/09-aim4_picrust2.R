@@ -147,7 +147,7 @@ main <- function(){
   bar_health_exercise <- ggplot(daa_healthy_exercise_annot_clean, aes(x = reorder(pathway_class, log2FoldChange), y = log2FoldChange, fill = log2FoldChange > 0)) +
     geom_bar(stat = "identity") +
     coord_flip() +  # horizontal bars
-    scale_fill_manual(values = c("#CC3C82", "#699CCC"), labels = c("Under-represented","Over-represented")) +
+    scale_fill_manual(values = c("#699CCC", "#CC3C82"), labels = c("Under-represented","Over-represented")) +
     labs(title = "Exercise Contrast",
          x = NULL,
          y = "log2 Fold Change",
@@ -345,6 +345,12 @@ main <- function(){
               colors = c("#638475", "#f6d0b1"))
   
   ggsave("results/aim4/13-abnormal_exercise_pca.png")
+  
+  # save significant pathways
+  write_tsv(daa_healthy_exercise_annot_clean, "results/aim4/14-sig_pathways_healthy_exercise.tsv")
+  write_tsv(daa_healthy_fibre_annot_clean, "results/aim4/15-sig_pathways_healthy_fibre.tsv")
+  write_tsv(daa_abnormal_exercise_annot_clean, "results/aim4/16-sig_pathways_abnormal_exercise.tsv")
+  write_tsv(daa_abnormal_fibre_annot_clean, "results/aim4/17-sig_pathways_abnormal_fibre.tsv")
 }
 
 main()
