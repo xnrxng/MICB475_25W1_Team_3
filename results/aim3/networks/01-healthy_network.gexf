@@ -1,0 +1,1675 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gexf xmlns="http://www.gexf.net/1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd" version="1.3">
+  <meta lastmodifieddate="2025-11-26">
+    <creator>trans_network class</creator>
+    <description>igraph -&gt; gexf converted file</description>
+    <keywords>igraph, gexf, R, rgexf</keywords>
+  </meta>
+  <graph mode="static" defaultedgetype="undirected">
+    <attributes class="node" mode="static">
+      <attribute id="att1" title="taxa" type="string"/>
+      <attribute id="att2" title="Phylum" type="string"/>
+      <attribute id="att3" title="RelativeAbundance" type="float"/>
+      <attribute id="att4" title="module" type="string"/>
+    </attributes>
+    <attributes class="edge" mode="static">
+      <attribute id="att1" title="label" type="string"/>
+    </attributes>
+    <nodes>
+      <node id="1" label="Segatella">
+        <attvalues>
+          <attvalue for="att1" value="4bf3198c78397be5af0b7325d20558de"/>
+          <attvalue for="att2" value="Bacteroidota"/>
+          <attvalue for="att3" value="9.27808594107315"/>
+          <attvalue for="att4" value="M4"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-195.7891383598" y="182.087547203679" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="2" label="Gemmiger">
+        <attvalues>
+          <attvalue for="att1" value="e553b9a0bb32467c71c89a4e97e55792"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="4.83318584661999"/>
+          <attvalue for="att4" value="M3"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="208.185827850461" y="98.928561608768" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="3" label="Christensenellaceae_R-7_group">
+        <attvalues>
+          <attvalue for="att1" value="fd2130b6a8a1db45c0f5381012b2e5e7"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="3.98446404767264"/>
+          <attvalue for="att4" value="M2"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-115.02283441305" y="-58.52781047721" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="4" label="UCG-002">
+        <attvalues>
+          <attvalue for="att1" value="e0a25143b7f2e59d7266ee802d1aeb61"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="3.88226140812297"/>
+          <attvalue for="att4" value="M2"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-216.985008402481" y="196.456106341276" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="5" label="Methanobrevibacter">
+        <attvalues>
+          <attvalue for="att1" value="36c384f43361bdb56744d67b5cef1583"/>
+          <attvalue for="att2" value="Methanobacteriota"/>
+          <attvalue for="att3" value="3.73945110275867"/>
+          <attvalue for="att4" value="M2"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="163.626567949684" y="23.0468545972136" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="6" label="Bifidobacterium">
+        <attvalues>
+          <attvalue for="att1" value="554c761996ebab999befda1b695fd81d"/>
+          <attvalue for="att2" value="Actinomycetota"/>
+          <attvalue for="att3" value="3.71236904772917"/>
+          <attvalue for="att4" value="M1"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-13.5799541721992" y="162.59826079573" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="7" label="Bacteroides">
+        <attvalues>
+          <attvalue for="att1" value="668fdb718997fc1589c7817655d4bb5f"/>
+          <attvalue for="att2" value="Bacteroidota"/>
+          <attvalue for="att3" value="2.17234053705719"/>
+          <attvalue for="att4" value="M5"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-209.018491687144" y="-11.7646256768384" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="8" label="Collinsella">
+        <attvalues>
+          <attvalue for="att1" value="dfba68ef0fd0e712608eb2a0078013a7"/>
+          <attvalue for="att2" value="Actinomycetota"/>
+          <attvalue for="att3" value="1.9813272570863"/>
+          <attvalue for="att4" value="M1"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="28.6041691367452" y="-220.915619705135" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="9" label="Adlercreutzia">
+        <attvalues>
+          <attvalue for="att1" value="d94a05561f7643eeb4a75f59435df2df"/>
+          <attvalue for="att2" value="Actinomycetota"/>
+          <attvalue for="att3" value="1.76756916201852"/>
+          <attvalue for="att4" value="M4"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-206.092644991037" y="247.581664349373" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="10" label="Faecalibacterium">
+        <attvalues>
+          <attvalue for="att1" value="a3f36ef32153f2fc2aaeac2feb23777f"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="1.70772141764023"/>
+          <attvalue for="att4" value="M1"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="80.0287277161452" y="-170.358451961607" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="11" label="Blautia">
+        <attvalues>
+          <attvalue for="att1" value="c1dc9ad5116d96b8ed863458fc0d0aec"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="1.61848938660944"/>
+          <attvalue for="att4" value="M1"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="165.757610089646" y="227.049278731781" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="12" label="Agathobacter">
+        <attvalues>
+          <attvalue for="att1" value="2d34c22edce4b1f2d8a5228ad78f8ea8"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="1.44612007165696"/>
+          <attvalue for="att4" value="M1"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="18.4420188975292" y="31.4909935178634" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="13" label="Clostridium">
+        <attvalues>
+          <attvalue for="att1" value="6a0bbfe5241c80e0f4e91b06fe4715c7"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="1.37235615934321"/>
+          <attvalue for="att4" value="M6"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="242.223886423025" y="-212.724356211045" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="14" label="Dorea">
+        <attvalues>
+          <attvalue for="att1" value="90a05d597112b554e4480a8eaae4e0aa"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="1.32620874868572"/>
+          <attvalue for="att4" value="M1"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="162.675190615144" y="36.0359205099371" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="15" label="Holdemanella">
+        <attvalues>
+          <attvalue for="att1" value="b677c6c95bbf603529595ed92876ef37"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="1.20901077012731"/>
+          <attvalue for="att4" value="M4"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="158.009384753298" y="-195.923868193189" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="16" label="Streptococcus">
+        <attvalues>
+          <attvalue for="att1" value="bd2ebc70501f7d867c204f94c4e483da"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="1.18450844785394"/>
+          <attvalue for="att4" value="M3"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="199.598231770258" y="50.5837611878727" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="17" label="Catenibacterium">
+        <attvalues>
+          <attvalue for="att1" value="b953ac3c6973b5a557774d4b2d005d48"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="1.18058232071114"/>
+          <attvalue for="att4" value="M4"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="188.908717415332" y="-58.1644340773883" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="18" label="Romboutsia">
+        <attvalues>
+          <attvalue for="att1" value="464a52deb6e8c4e2b57d980a8d18f04c"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.730855762105473"/>
+          <attvalue for="att4" value="M6"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="54.3003120821352" y="-59.370877264945" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="19" label="Ruminococcus">
+        <attvalues>
+          <attvalue for="att1" value="b5273023863d8556eae399fbe127bfa1"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.710433734271082"/>
+          <attvalue for="att4" value="M2"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="240.303878781936" y="-191.51918831985" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="20" label="Massiliprevotella">
+        <attvalues>
+          <attvalue for="att1" value="33d591dd6da939cd5ffa983ad2b49280"/>
+          <attvalue for="att2" value="Bacteroidota"/>
+          <attvalue for="att3" value="0.626556447327715"/>
+          <attvalue for="att4" value="M4"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-155.498411048795" y="-121.245838963495" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="21" label="Roseburia">
+        <attvalues>
+          <attvalue for="att1" value="7d285be20e3ad3812eb21be379357ef1"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.589659074441221"/>
+          <attvalue for="att4" value="M1"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-123.056291077055" y="-224.151649681339" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="22" label="Lachnospiraceae_NK4A136_group">
+        <attvalues>
+          <attvalue for="att1" value="470dd02996e31255357eeeaa3672b469"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.572916506075733"/>
+          <attvalue for="att4" value="M1"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-193.806705511754" y="-243.747515468669" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="23" label="NK4A214_group">
+        <attvalues>
+          <attvalue for="att1" value="6013b9e15b35c4e724eb0c323c05f9d3"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.551538641005006"/>
+          <attvalue for="att4" value="M2"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-250" y="-216.272355036868" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="24" label="Alistipes">
+        <attvalues>
+          <attvalue for="att1" value="e47a63686b619f67783f9b9aa52b86bf"/>
+          <attvalue for="att2" value="Bacteroidota"/>
+          <attvalue for="att3" value="0.498248145624372"/>
+          <attvalue for="att4" value="M5"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="195.762712031076" y="-163.299428951948" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="25" label="UCG-005">
+        <attvalues>
+          <attvalue for="att1" value="3cc6cc9dfd4acb48c522fd2e6b28c2fb"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.486675320590892"/>
+          <attvalue for="att4" value="M2"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-125.422175527201" y="170.797659432426" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="26" label="Senegalimassilia">
+        <attvalues>
+          <attvalue for="att1" value="a684e731a405ce64b1669976e6658a2d"/>
+          <attvalue for="att2" value="Actinomycetota"/>
+          <attvalue for="att3" value="0.48644920855649"/>
+          <attvalue for="att4" value="M4"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="62.9181905061325" y="248.463453983562" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="27" label="Coprococcus">
+        <attvalues>
+          <attvalue for="att1" value="a0b7d83fb64749f9a4b15b3728425b97"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.475585553085453"/>
+          <attvalue for="att4" value="M1"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="103.854958555125" y="35.6447534159302" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="28" label="Mediterraneibacter">
+        <attvalues>
+          <attvalue for="att1" value="6a6fcf8f9b8bb1ab9e5f8456ee7fb109"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.46139188401686"/>
+          <attvalue for="att4" value="M1"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="161.374410365321" y="250" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="29" label="Slackia">
+        <attvalues>
+          <attvalue for="att1" value="94aa237534fc5913f79df9f144f7a9b3"/>
+          <attvalue for="att2" value="Actinomycetota"/>
+          <attvalue for="att3" value="0.410711954851593"/>
+          <attvalue for="att4" value="M1"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="204.804733031099" y="-151.924543197492" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="30" label="Leyella">
+        <attvalues>
+          <attvalue for="att1" value="1bbe672253a9a19978b7163262e6db45"/>
+          <attvalue for="att2" value="Bacteroidota"/>
+          <attvalue for="att3" value="0.395870783139031"/>
+          <attvalue for="att4" value="M4"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="188.090235926921" y="-113.871821230153" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="31" label="Parabacteroides">
+        <attvalues>
+          <attvalue for="att1" value="e17d964cd0fd8c2ddbd1dacfa8b536e3"/>
+          <attvalue for="att2" value="Bacteroidota"/>
+          <attvalue for="att3" value="0.290687575863157"/>
+          <attvalue for="att4" value="M5"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-17.8783503630617" y="-139.26325399132" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="32" label="Haemophilus">
+        <attvalues>
+          <attvalue for="att1" value="e27680d4009f98f30248d823bc17fb8e"/>
+          <attvalue for="att2" value="Pseudomonadota"/>
+          <attvalue for="att3" value="0.264366079494825"/>
+          <attvalue for="att4" value="M3"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-132.213436702961" y="1.10821518534598" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="33" label="Family_XIII_AD3011_group">
+        <attvalues>
+          <attvalue for="att1" value="4119ee9eb78e6baa92065d886a5e24ac"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.242433212157839"/>
+          <attvalue for="att4" value="M2"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="181.924219066515" y="-117.895628443079" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="34" label="Megasphaera">
+        <attvalues>
+          <attvalue for="att1" value="85b4d7d480ef06ef2844b93115d87480"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.237016801151938"/>
+          <attvalue for="att4" value="M10"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-203.893850937244" y="-165.965661288493" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="35" label="Solobacterium">
+        <attvalues>
+          <attvalue for="att1" value="4615dffd5616f456ec13b4b8b2e2c556"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.225402864839476"/>
+          <attvalue for="att4" value="M3"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="182.843186394798" y="-183.300383203717" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="36" label="Parolsenella">
+        <attvalues>
+          <attvalue for="att1" value="c6adabe4621cc8ab924f25db04dec07c"/>
+          <attvalue for="att2" value="Actinomycetota"/>
+          <attvalue for="att3" value="0.220932013250165"/>
+          <attvalue for="att4" value="M4"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-74.24849147268" y="229.355490328183" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="37" label="Lachnospiraceae_NK3A20_group">
+        <attvalues>
+          <attvalue for="att1" value="03f9f24310afe6886050a6af1b4810d1"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.210428081470222"/>
+          <attvalue for="att4" value="M3"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-247.058353346823" y="64.2945506402488" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="38" label="Acutalibacter">
+        <attvalues>
+          <attvalue for="att1" value="98ff1f2b1008b5e0971997cd5070fc03"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.19768358498575"/>
+          <attvalue for="att4" value="M9"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-129.40375546063" y="104.088793013189" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="39" label="[Eubacterium]_siraeum_group">
+        <attvalues>
+          <attvalue for="att1" value="79bdd1b666f32bea849295d02c3c1494"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.190591889361326"/>
+          <attvalue for="att4" value="M2"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-190.677731260696" y="-250" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="40" label="Ruthenibacterium">
+        <attvalues>
+          <attvalue for="att1" value="c88e37c00a5abc483dada3afc5da38a3"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.181824909118379"/>
+          <attvalue for="att4" value="M9"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-18.2847075539357" y="74.6560980163919" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="41" label="Fusicatenibacter">
+        <attvalues>
+          <attvalue for="att1" value="d5c7d97e6f4f5789d574d321dcca0992"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.177199890232885"/>
+          <attvalue for="att4" value="M3"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-221.334842633284" y="80.4543824612871" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="42" label="Erysipelotrichaceae_UCG-006">
+        <attvalues>
+          <attvalue for="att1" value="0a3aa5435ee4516b3953f745f41c011e"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.167065959963781"/>
+          <attvalue for="att4" value="M3"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="238.823501226564" y="45.046476855813" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="43" label="Anaerostipes">
+        <attvalues>
+          <attvalue for="att1" value="c9ea71f39bda8752713c8e90dff2b875"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.162605386194216"/>
+          <attvalue for="att4" value="M1"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="1.01991054241708" y="89.0743639644145" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="44" label="Schaalia">
+        <attvalues>
+          <attvalue for="att1" value="608e6548b1b4cbb6176c8fce090991a5"/>
+          <attvalue for="att2" value="Actinomycetota"/>
+          <attvalue for="att3" value="0.137280838341201"/>
+          <attvalue for="att4" value="M3"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="161.371314455471" y="39.307869508694" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="45" label="Veillonella">
+        <attvalues>
+          <attvalue for="att1" value="5608c3e6c9de9ceb79610e7786bd0ac4"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.136150278169191"/>
+          <attvalue for="att4" value="M3"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="132.041800659649" y="191.544064400027" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="46" label="Barnesiella">
+        <attvalues>
+          <attvalue for="att1" value="d4a84311599aa0d94dff1a4230db22fe"/>
+          <attvalue for="att2" value="Bacteroidota"/>
+          <attvalue for="att3" value="0.128205523505888"/>
+          <attvalue for="att4" value="M5"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-218.10570915464" y="-23.803961301854" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="47" label="UCG-003">
+        <attvalues>
+          <attvalue for="att1" value="04a802674683d317a8c7484ce2407ce0"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.124145784706399"/>
+          <attvalue for="att4" value="M2"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-39.19638264837" y="243.06606090254" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="48" label="Rikenellaceae_RC9_gut_group">
+        <attvalues>
+          <attvalue for="att1" value="e23eabf09d37ad3299a06defb54f45f3"/>
+          <attvalue for="att2" value="Bacteroidota"/>
+          <attvalue for="att3" value="0.123200225289809"/>
+          <attvalue for="att4" value="M4"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="64.7501686443216" y="-19.6442853529817" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="49" label="[Eubacterium]_xylanophilum_group">
+        <attvalues>
+          <attvalue for="att1" value="00979c6b417b7978c1c656e263cdd054"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.11535824882396"/>
+          <attvalue for="att4" value="M2"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-208.808266109735" y="135.506021760195" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="50" label="Prevotella">
+        <attvalues>
+          <attvalue for="att1" value="d0b698c7298bf04110a6d2f220879bfb"/>
+          <attvalue for="att2" value="Bacteroidota"/>
+          <attvalue for="att3" value="0.0906606479754237"/>
+          <attvalue for="att4" value="M7"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-3.69112737476399" y="214.344999673909" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="51" label="Agathobaculum">
+        <attvalues>
+          <attvalue for="att1" value="0437c9910becc153a3d7838fd8eaa64b"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.0820170015694231"/>
+          <attvalue for="att4" value="M1"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="33.0222969426842" y="157.953611897285" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="52" label="Intestinibacter">
+        <attvalues>
+          <attvalue for="att1" value="06296ef8e5b973cb2ac066c552af976a"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.0754186412927853"/>
+          <attvalue for="att4" value="M6"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="112.420065682082" y="-226.815574693452" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="53" label="Mogibacterium">
+        <attvalues>
+          <attvalue for="att1" value="07dae4672402022ad477f7aabdebb7bb"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.0686866693594554"/>
+          <attvalue for="att4" value="M3"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-95.0561835174256" y="-188.661328453831" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="54" label="Bilophila">
+        <attvalues>
+          <attvalue for="att1" value="ece50a62168f85fc61385d8adb4c6494"/>
+          <attvalue for="att2" value="Thermodesulfobacteriota"/>
+          <attvalue for="att3" value="0.0613380282413931"/>
+          <attvalue for="att4" value="M5"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-232.41833171034" y="-39.5807305074212" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="55" label="Achromobacter">
+        <attvalues>
+          <attvalue for="att1" value="b4c9bc9315d2331ee859d99151ef4b46"/>
+          <attvalue for="att2" value="Pseudomonadota"/>
+          <attvalue for="att3" value="0.0548218905227196"/>
+          <attvalue for="att4" value="M7"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-152.140804101183" y="130.507113677192" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="56" label="Oscillibacter">
+        <attvalues>
+          <attvalue for="att1" value="5e3635ff354752b0f3fc00f69a52c717"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.0511115975945791"/>
+          <attvalue for="att4" value="M2"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-160.712082912601" y="214.09159226685" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="57" label="Burkholderia-Caballeronia-Paraburkholderia">
+        <attvalues>
+          <attvalue for="att1" value="d0b883a618489cd1fe899d23c48c1d5e"/>
+          <attvalue for="att2" value="Pseudomonadota"/>
+          <attvalue for="att3" value="0.0489738110875064"/>
+          <attvalue for="att4" value="M7"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="250" y="-118.372585381722" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="58" label="Butyricimonas">
+        <attvalues>
+          <attvalue for="att1" value="9ad9a8e28b4793a3ab1dabaaa37bdc41"/>
+          <attvalue for="att2" value="Bacteroidota"/>
+          <attvalue for="att3" value="0.0481824189670997"/>
+          <attvalue for="att4" value="M2"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-214.715410190378" y="-243.239899981604" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="59" label="Rothia">
+        <attvalues>
+          <attvalue for="att1" value="b944e446e87fa7a72fe2cccb95deee14"/>
+          <attvalue for="att2" value="Actinomycetota"/>
+          <attvalue for="att3" value="0.0443693478415037"/>
+          <attvalue for="att4" value="M3"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-9.13837864791972" y="-246.770262972447" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="60" label="Hoylesella">
+        <attvalues>
+          <attvalue for="att1" value="0155001719931a91310b436eba535d6b"/>
+          <attvalue for="att2" value="Bacteroidota"/>
+          <attvalue for="att3" value="0.0422521169739221"/>
+          <attvalue for="att4" value="M8"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="235.025807755494" y="-231.177724676145" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="61" label="UCG-009">
+        <attvalues>
+          <attvalue for="att1" value="4125ee88e8f3fd70dea8d002d0b0fba4"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.0398059958744832"/>
+          <attvalue for="att4" value="M2"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="85.5172364423826" y="-53.0988827482541" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="62" label="[Eubacterium]_ventriosum_group">
+        <attvalues>
+          <attvalue for="att1" value="75622b8ee0f6a2b8a796bbfd264ca9fa"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.0381923781744331"/>
+          <attvalue for="att4" value="M1"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-19.0982055710363" y="-125.491950582268" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="63" label="Turicibacter">
+        <attvalues>
+          <attvalue for="att1" value="e1d2a9fa4aa3f8e81067cf362e0cd257"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.0367534834100573"/>
+          <attvalue for="att4" value="M6"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-188.418912307575" y="233.18851121755" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="64" label="[Ruminococcus]_gauvreauii_group">
+        <attvalues>
+          <attvalue for="att1" value="dffa04ca171f459056b9466d7acfe601"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.0354687559418645"/>
+          <attvalue for="att4" value="M1"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-7.49142297410009" y="85.1086337957256" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="65" label="Gemella">
+        <attvalues>
+          <attvalue for="att1" value="cda4e6f933bb3108ea3e92f9db411c00"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.0343793070488371"/>
+          <attvalue for="att4" value="M3"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="92.317788274324" y="-116.200822105135" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="66" label="Intestinimonas">
+        <attvalues>
+          <attvalue for="att1" value="680d83cb233cffcc6405e08c46982042"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.0342045841131629"/>
+          <attvalue for="att4" value="M2"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="142.806097052969" y="3.28125307687071" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="67" label="Fenollaria">
+        <attvalues>
+          <attvalue for="att1" value="cadafbd17c8a30e17ae4b16c1caa1b69"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.0338140269628323"/>
+          <attvalue for="att4" value="M8"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-31.8141419466823" y="-231.938051343142" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="68" label="Granulicatella">
+        <attvalues>
+          <attvalue for="att1" value="24a60c6448e70d9198ad6ba93520958c"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.0329815235634434"/>
+          <attvalue for="att4" value="M3"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-67.6295917941133" y="-177.370958751481" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="69" label="Christensenella">
+        <attvalues>
+          <attvalue for="att1" value="a3aefc7d6b2877f371db69ea57900e5f"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.0326834667908227"/>
+          <attvalue for="att4" value="M9"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="216.912733201171" y="214.152208672067" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="70" label="Odoribacter">
+        <attvalues>
+          <attvalue for="att1" value="3ea67969a01ec419ec1d4784d379ad1d"/>
+          <attvalue for="att2" value="Bacteroidota"/>
+          <attvalue for="att3" value="0.0326629111513316"/>
+          <attvalue for="att4" value="M5"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="221.299840449314" y="27.9493571929125" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="71" label="Fusobacterium">
+        <attvalues>
+          <attvalue for="att1" value="8643001f205ade41838a964499dd97b8"/>
+          <attvalue for="att2" value="Fusobacteriota"/>
+          <attvalue for="att3" value="0.030278456970366"/>
+          <attvalue for="att4" value="M7"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-57.8269989514692" y="-10.5864882458586" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="72" label="Marvinbryantia">
+        <attvalues>
+          <attvalue for="att1" value="457ee45e6a2eda370c854acc25056938"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.0293328975537761"/>
+          <attvalue for="att4" value="M1"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-202.325449263977" y="-176.208051494547" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="73" label="Gordonibacter">
+        <attvalues>
+          <attvalue for="att1" value="23368c2d745ed62db9ac0a19c9dcec5d"/>
+          <attvalue for="att2" value="Actinomycetota"/>
+          <attvalue for="att3" value="0.028572338892606"/>
+          <attvalue for="att4" value="M4"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="229.700951333786" y="-242.345722063012" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="74" label="Terrisporobacter">
+        <attvalues>
+          <attvalue for="att1" value="bb5095d1e0f85abd923860c199d75c48"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.0285415054333694"/>
+          <attvalue for="att4" value="M6"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-52.2950038481717" y="57.8743703002459" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="75" label="Pseudomonas">
+        <attvalues>
+          <attvalue for="att1" value="0dc8e0e89e89cf4f0c71808666f6c6e7"/>
+          <attvalue for="att2" value="Pseudomonadota"/>
+          <attvalue for="att3" value="0.0284181715964229"/>
+          <attvalue for="att4" value="M7"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="229.833071505005" y="-53.7126622986533" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="76" label="DTU089">
+        <attvalues>
+          <attvalue for="att1" value="305b6e6f59c05104e9f7d999ec96ae90"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.0269689990123015"/>
+          <attvalue for="att4" value="M5"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-200.14957882702" y="112.127223843703" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="77" label="Mitsuokella">
+        <attvalues>
+          <attvalue for="att1" value="711b44ab84f398e0377e43760b57bf61"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.0247695455867556"/>
+          <attvalue for="att4" value="M10"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-146.21936774792" y="174.917629052345" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="78" label="Flavonifractor">
+        <attvalues>
+          <attvalue for="att1" value="cb63ff338fde1171b1e985e8211b1929"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.0232895395433976"/>
+          <attvalue for="att4" value="M5"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="207.404472111197" y="-175.222234648024" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="79" label="Peptoniphilus">
+        <attvalues>
+          <attvalue for="att1" value="83afff0ade89764d7bfe335e9e3dc181"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.0225289808822275"/>
+          <attvalue for="att4" value="M8"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-158.637172664252" y="-194.611756384385" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="80" label="Lancefieldella">
+        <attvalues>
+          <attvalue for="att1" value="1b29cef84de6cbd9cd52eb9dbaa7fe7d"/>
+          <attvalue for="att2" value="Actinomycetota"/>
+          <attvalue for="att3" value="0.0220870346331692"/>
+          <attvalue for="att4" value="M3"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="18.7280016675722" y="-88.9389284025198" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="81" label="Faecalimonas">
+        <attvalues>
+          <attvalue for="att1" value="9d21d7d00d7e938a7e1c374a4f4bb833"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.0194764684178016"/>
+          <attvalue for="att4" value="M1"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-79.5344638239083" y="-187.647232520249" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="82" label="Lachnospiraceae_FCS020_group">
+        <attvalues>
+          <attvalue for="att1" value="7e048b0e0c32d2f839e9f2098a4ebb35"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.0177909059795327"/>
+          <attvalue for="att4" value="M1"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="238.913688594783" y="141.010370061061" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="83" label="Eggerthella">
+        <attvalues>
+          <attvalue for="att1" value="6bb6aad559c5eaeb22b2eef7874ef038"/>
+          <attvalue for="att2" value="Actinomycetota"/>
+          <attvalue for="att3" value="0.0168042352839607"/>
+          <attvalue for="att4" value="M4"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-84.3490035351858" y="-116.530117799292" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="84" label="Eisenbergiella">
+        <attvalues>
+          <attvalue for="att1" value="737e3567af27a204ac8fa1af5c611cc7"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.0166397901680321"/>
+          <attvalue for="att4" value="M9"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-95.0906824375213" y="-57.7381792978452" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="85" label="Angelakisella">
+        <attvalues>
+          <attvalue for="att1" value="1b6b527a428a9224372c97c6a34d3502"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.0160333988030451"/>
+          <attvalue for="att4" value="M2"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-180.729805199536" y="-111.825207423432" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="86" label="Porphyromonas">
+        <attvalues>
+          <attvalue for="att1" value="80f3831bad660af176c343b3317f0953"/>
+          <attvalue for="att2" value="Bacteroidota"/>
+          <attvalue for="att3" value="0.0140703352316466"/>
+          <attvalue for="att4" value="M8"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="-19.9849432907422" y="-122.653304869698" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+      <node id="87" label="Ezakiella">
+        <attvalues>
+          <attvalue for="att1" value="664e750d411cfeb18b61f044356d626d"/>
+          <attvalue for="att2" value="Bacillota"/>
+          <attvalue for="att3" value="0.0135050551456418"/>
+          <attvalue for="att4" value="M8"/>
+        </attvalues>
+        <viz:color r="255" g="99" b="71" a="1"/>
+        <viz:position x="164.102594116315" y="-242.984695260569" z="0"/>
+        <viz:size value="5.74712643678161"/>
+      </node>
+    </nodes>
+    <edges>
+      <edge id="0" label="+" source="1" target="17" weight="0.4524739">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="1" label="+" source="1" target="30" weight="0.4706255">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="2" label="+" source="2" target="11" weight="0.4183879">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="3" label="+" source="2" target="16" weight="0.4024302">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="4" label="+" source="2" target="41" weight="0.4305506">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="5" label="+" source="2" target="44" weight="0.4991563">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="6" label="+" source="3" target="4" weight="0.5261786">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="7" label="+" source="3" target="5" weight="0.427092">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="8" label="+" source="3" target="9" weight="0.4685688">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="9" label="+" source="3" target="23" weight="0.581885">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="10" label="+" source="3" target="25" weight="0.4904613">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="11" label="+" source="3" target="33" weight="0.5689839">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="12" label="+" source="3" target="39" weight="0.4198516">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="13" label="+" source="4" target="5" weight="0.3867924">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="14" label="+" source="4" target="23" weight="0.6344378">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="15" label="+" source="4" target="25" weight="0.6957571">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="16" label="+" source="4" target="47" weight="0.5800218">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="17" label="+" source="4" target="56" weight="0.4841952">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="18" label="+" source="4" target="61" weight="0.4505635">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="19" label="+" source="4" target="66" weight="0.4490606">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="20" label="+" source="4" target="85" weight="0.3991177">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="21" label="+" source="6" target="8" weight="0.4021716">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="22" label="+" source="7" target="24" weight="0.6551545">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="23" label="+" source="7" target="31" weight="0.632923">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="24" label="+" source="7" target="54" weight="0.392629">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="25" label="+" source="7" target="70" weight="0.4757309">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="26" label="+" source="7" target="78" weight="0.441731">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="27" label="+" source="8" target="11" weight="0.4599452">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="28" label="+" source="8" target="14" weight="0.425562">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="29" label="+" source="8" target="26" weight="0.4263218">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="30" label="+" source="8" target="29" weight="0.4379297">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="31" label="+" source="8" target="44" weight="0.4379252">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="32" label="+" source="9" target="15" weight="0.453109">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="33" label="+" source="9" target="17" weight="0.4030732">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="34" label="+" source="9" target="26" weight="0.5362854">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="35" label="+" source="9" target="33" weight="0.3881033">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="36" label="-" source="9" target="73" weight="0.4140655">
+        <attvalues>
+          <attvalue for="att1" value="-"/>
+        </attvalues>
+      </edge>
+      <edge id="37" label="+" source="10" target="12" weight="0.5315916">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="38" label="+" source="10" target="21" weight="0.4494018">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="39" label="+" source="10" target="22" weight="0.4107636">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="40" label="+" source="10" target="27" weight="0.3921815">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="41" label="+" source="10" target="32" weight="0.3861274">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="42" label="+" source="10" target="51" weight="0.4614032">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="43" label="+" source="11" target="14" weight="0.5689756">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="44" label="+" source="11" target="16" weight="0.416335">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="45" label="+" source="11" target="27" weight="0.4928765">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="46" label="+" source="11" target="28" weight="0.5319617">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="47" label="+" source="11" target="41" weight="0.4589591">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="48" label="+" source="11" target="43" weight="0.4219631">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="49" label="+" source="11" target="44" weight="0.4318516">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="50" label="+" source="11" target="64" weight="0.4676118">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="51" label="+" source="11" target="72" weight="0.4793965">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="52" label="+" source="11" target="81" weight="0.4582853">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="53" label="+" source="11" target="82" weight="0.4218221">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="54" label="+" source="12" target="14" weight="0.4536632">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="55" label="+" source="12" target="21" weight="0.4307086">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="56" label="+" source="12" target="27" weight="0.3844748">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="57" label="+" source="13" target="18" weight="0.5224193">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="58" label="+" source="13" target="52" weight="0.4260828">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="59" label="+" source="14" target="27" weight="0.5605918">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="60" label="+" source="14" target="28" weight="0.5253509">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="61" label="+" source="14" target="72" weight="0.4193903">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="62" label="+" source="14" target="81" weight="0.5522659">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="63" label="+" source="15" target="17" weight="0.42502">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="64" label="+" source="15" target="26" weight="0.5041551">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="65" label="+" source="16" target="44" weight="0.6146753">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="66" label="+" source="16" target="59" weight="0.4505919">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="67" label="+" source="16" target="65" weight="0.5904311">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="68" label="+" source="16" target="68" weight="0.5147275">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="69" label="+" source="16" target="80" weight="0.5108736">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="70" label="+" source="17" target="26" weight="0.4859851">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="71" label="+" source="17" target="30" weight="0.3835578">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="72" label="+" source="17" target="36" weight="0.3905161">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="73" label="+" source="18" target="52" weight="0.380856">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="74" label="+" source="18" target="74" weight="0.3879544">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="75" label="+" source="19" target="25" weight="0.4171856">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="76" label="+" source="19" target="49" weight="0.3810209">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="77" label="+" source="20" target="48" weight="0.3999518">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="78" label="+" source="23" target="25" weight="0.5568983">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="79" label="+" source="23" target="33" weight="0.5043611">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="80" label="+" source="23" target="85" weight="0.4264317">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="81" label="-" source="24" target="30" weight="0.3876951">
+        <attvalues>
+          <attvalue for="att1" value="-"/>
+        </attvalues>
+      </edge>
+      <edge id="82" label="+" source="24" target="31" weight="0.4751827">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="83" label="+" source="24" target="46" weight="0.463814">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="84" label="+" source="24" target="54" weight="0.4105236">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="85" label="+" source="24" target="70" weight="0.5143331">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="86" label="+" source="24" target="76" weight="0.4293358">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="87" label="+" source="25" target="47" weight="0.510556">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="88" label="+" source="25" target="56" weight="0.4311527">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="89" label="+" source="25" target="58" weight="0.3984332">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="90" label="+" source="26" target="33" weight="0.3821026">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="91" label="+" source="27" target="28" weight="0.4358019">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="92" label="+" source="27" target="72" weight="0.4243401">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="93" label="+" source="28" target="64" weight="0.3859394">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="94" label="+" source="28" target="81" weight="0.4886435">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="95" label="+" source="30" target="48" weight="0.3872663">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="96" label="+" source="31" target="70" weight="0.3937842">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="97" label="+" source="32" target="45" weight="0.4136213">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="98" label="+" source="33" target="44" weight="0.4074344">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="99" label="+" source="33" target="53" weight="0.3877752">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="100" label="+" source="33" target="72" weight="0.4445983">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="101" label="+" source="34" target="77" weight="0.4666178">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="102" label="+" source="35" target="42" weight="0.4074096">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="103" label="+" source="35" target="53" weight="0.4127364">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="104" label="+" source="37" target="42" weight="0.4298722">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="105" label="+" source="38" target="40" weight="0.500956">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="106" label="+" source="38" target="44" weight="0.4136469">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="107" label="+" source="40" target="69" weight="0.3869511">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="108" label="+" source="40" target="84" weight="0.5113847">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="109" label="+" source="44" target="53" weight="0.4069254">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="110" label="+" source="44" target="65" weight="0.5154278">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="111" label="+" source="44" target="80" weight="0.5974554">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="112" label="+" source="45" target="59" weight="0.4312267">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="113" label="+" source="47" target="56" weight="0.5039191">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="114" label="+" source="47" target="66" weight="0.3873524">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="115" label="+" source="50" target="55" weight="0.5085222">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="116" label="+" source="50" target="57" weight="0.5116729">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="117" label="+" source="51" target="62" weight="0.3945845">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="118" label="+" source="52" target="63" weight="0.4441491">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="119" label="+" source="52" target="74" weight="0.543719">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="120" label="+" source="53" target="80" weight="0.38241">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="121" label="+" source="55" target="57" weight="0.5652074">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="122" label="+" source="55" target="71" weight="0.3850025">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="123" label="+" source="55" target="75" weight="0.4391503">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="124" label="+" source="56" target="66" weight="0.3975149">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="125" label="+" source="57" target="75" weight="0.4241081">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="126" label="+" source="59" target="65" weight="0.408595">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="127" label="+" source="59" target="68" weight="0.4006425">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="128" label="+" source="59" target="80" weight="0.4017387">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="129" label="+" source="60" target="67" weight="0.3852247">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="130" label="+" source="63" target="74" weight="0.3978289">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="131" label="+" source="64" target="82" weight="0.3803947">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="132" label="+" source="65" target="68" weight="0.5086422">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="133" label="+" source="65" target="80" weight="0.4127315">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="134" label="+" source="67" target="79" weight="0.4097566">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="135" label="+" source="67" target="86" weight="0.4973573">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="136" label="+" source="72" target="81" weight="0.395893">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="137" label="+" source="73" target="83" weight="0.3880639">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+      <edge id="138" label="+" source="79" target="87" weight="0.3868494">
+        <attvalues>
+          <attvalue for="att1" value="+"/>
+        </attvalues>
+      </edge>
+    </edges>
+  </graph>
+</gexf>
