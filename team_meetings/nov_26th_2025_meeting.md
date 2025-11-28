@@ -8,6 +8,7 @@
 
 **Meeting notes:**
 - In our manuscript, we can make it clear that there was quite a bit of significance (aim4 05 plot), so that’s why we chose a pretty strict p-value and log fold cut-off to reduce it. Can elaborate on it in the manuscript but in the presentation maybe not cause it’s too short.
+- In the manuscript explain that the log2 generated A LOT of significance
 - Look up what KO term the infectious disease one is (aim4 05 plot) and maybe explain it more in the manuscript to really build our case.
 - (aim4 05 plot again) Healthy profile is expected which is good. For the abnormal one, pathogenic behaviours are reduced when they exercise and eat more fibre so really good also (so it's becoming a healthier phenotype)
 - For alpha diversity, it’s better to do a linear model than Kruskal-Wallis???
