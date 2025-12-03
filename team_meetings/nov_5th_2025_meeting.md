@@ -30,3 +30,6 @@
 - Confidence intervals - just p value and standard error. Delete the intercept
 
 **To do:**
+- Finish aims 1, 2 and 3.
+- Start preparing slides.
+- Start manuscript writing.

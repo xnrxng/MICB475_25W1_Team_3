@@ -21,7 +21,8 @@ Here are the notes and the agenda for every team meeting:
 | Month | Week 1 | Week 2 | Week 3 | Week 4 | Week 5 |
 |:----------:|:----------:|:----------:|:----------:|:----------:|:----------:|
 | October | [October 1st](https://github.com/xnrxng/MICB475_25W1_Team_3/blob/main/team_meetings/oct_1st_2025_meeting.md) | [October 8th](https://github.com/xnrxng/MICB475_25W1_Team_3/blob/main/team_meetings/oct_8th_2025_meeting.md) | [October 15th](https://github.com/xnrxng/MICB475_25W1_Team_3/blob/main/team_meetings/oct_15th_2025_meeting.md) | [October 22nd](https://github.com/xnrxng/MICB475_25W1_Team_3/blob/main/team_meetings/oct_22nd_2025_meeting.md) | [October 29th](https://github.com/xnrxng/MICB475_25W1_Team_3/blob/main/team_meetings/oct_29th_2025_meeting.md) |
-| November | [November 5th](https://github.com/xnrxng/MICB475_25W1_Team_3/blob/main/team_meetings/nov_5th_2025_meeting.md) | Midterm break, NA | [November 19th](https://github.com/xnrxng/MICB475_25W1_Team_3/blob/main/team_meetings/nov_19th_2025_meeting.md) | [November 26th](https://github.com/xnrxng/MICB475_25W1_Team_3/blob/main/team_meetings/nov_26th_2025_meeting.md) | link |
+| November | [November 5th](https://github.com/xnrxng/MICB475_25W1_Team_3/blob/main/team_meetings/nov_5th_2025_meeting.md) | Midterm break, NA | [November 19th](https://github.com/xnrxng/MICB475_25W1_Team_3/blob/main/team_meetings/nov_19th_2025_meeting.md) | [November 26th](https://github.com/xnrxng/MICB475_25W1_Team_3/blob/main/team_meetings/nov_26th_2025_meeting.md) | NA |
+| December | [December 2nd](https://github.com/xnrxng/MICB475_25W1_Team_3/blob/main/team_meetings/dec_2nd_2025_meeting.md) | NA | NA | NA | NA |
 
 ## Reproducibility
 
@@ -79,8 +80,6 @@ To reproduce the results FULLY in this repository, you should have the following
 
 \*IMPORTANT: please note that running `bash bin/02-qiime2_data_filtering.sh` will give you an error as line 30 expects an absolute path. Please change the absolute path to where your classifier is hosted. The classifier used in this project is SILVA version 138 99% OTUs, trained for the primer pair 515F/806R, which targets the V4 region of the 16S rRNA gene.
 
-After this is set-up, you can re-run ALL the code using `make all` . Please note that this might be a time-consuming and memory-intensive process. We recommend starting a double-pane `tmux` session where `htop` can be run, while `make all` is running.
-
-If you wish to ONLY reproduce the results, after the FASTQ files have already been processed, you can run `make all` directly. You will need to run `make clean` first.
+After this is set-up, you can re-run the R scripts using the usage specified in eachone . Please note that this might be a time-consuming and memory-intensive process. We recommend starting a double-pane `tmux` session where `htop` can be run, while your CLI is running.
 
 If you encounter any errors, have any questions or suggestions, please make a GitHub issue in the repository.
