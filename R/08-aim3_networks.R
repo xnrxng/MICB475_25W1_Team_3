@@ -127,7 +127,7 @@ main <- function(){
   ggsave("results/aim3/networks/12-abnormal_meta_correlation.png", width = 6, height = 5)
   
   write_tsv(t_healthy[["res_node_table"]], "results/aim3/networks/13-healthy_network_roles.tsv")
-  write_tsv(t_abnormal[["res_node_table"]], "results/aim3/networks/13-abnormal_network_roles.tsv")
+  write_tsv(t_abnormal[["res_node_table"]], "results/aim3/networks/14-abnormal_network_roles.tsv")
 }
 
 # helper functions
