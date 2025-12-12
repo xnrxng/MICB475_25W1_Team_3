@@ -93,17 +93,45 @@ main <- function(){
   t_abnormal$get_adjacency_matrix()
   
   #plot roles 
-  t_healthy$plot_taxa_roles(use_type = 1)
+  role_cols <- c(
+    "Peripheral nodes" = "#1f77b4",
+    "Connectors"  = "#ff7f0e",
+    "Module hubs" = "#2ca02c",
+    "NA" = "lightgray"
+  )
+  
+  t_healthy$plot_taxa_roles(use_type = 1)+
+    scale_color_manual(values = role_cols)
   ggsave("results/aim3/networks/07-healthy_node_roles.png")
   
-  t_abnormal$plot_taxa_roles(use_type = 1)
+  t_abnormal$plot_taxa_roles(use_type = 1)+
+    scale_color_manual(values = role_cols)
   ggsave("results/aim3/networks/08-abnormal_node_roles.png")
   
   #plot roles based on phylum
-  t_healthy$plot_taxa_roles(use_type = 2) + theme_bw() +theme(axis.text.x = element_text(angle = 45, vjust = 0.63, size = 10))
+  role_shapes <- c(
+    "Peripheral nodes" = 17,   
+    "Connectors"  = 16,   
+    "Module hubs" = 15,   
+    "NA" = 18   
+  )
+  
+  t_healthy$plot_taxa_roles(use_type = 2) +
+    scale_shape_manual(values = role_shapes, name = "Taxa role") +
+    theme_bw() +
+    ylab(NULL) +
+    xlab(NULL) +
+    theme(axis.text.x = element_text(angle = 45, vjust = 0.63, size = 10))
+  
   ggsave("results/aim3/networks/09-healthy_node_roles_phylum.png", width = 8, height = 5)
   
-  t_abnormal$plot_taxa_roles(use_type = 2)+ theme_bw() +theme(axis.text.x = element_text(angle = 45, vjust = 0.63, size = 10))
+  t_abnormal$plot_taxa_roles(use_type = 2) +
+    scale_shape_manual(values = role_shapes, name = "Taxa role") +
+    theme_bw() +
+    ylab(NULL) +
+    xlab(NULL) +
+    theme(axis.text.x = element_text(angle = 45, vjust = 0.63, size = 10))
+  
   ggsave("results/aim3/networks/10-abnormal_node_roles_phylum.png", width = 8, height = 5)
   
   #eigengene analysis of modules
