@@ -101,12 +101,12 @@ main <- function(){
   )
   
   t_healthy$plot_taxa_roles(use_type = 1)+
-    scale_color_manual(values = role_cols)
-  ggsave("results/aim3/networks/07-healthy_node_roles.png")
+    scale_color_manual(values = role_cols)+theme(legend.position = "bottom")
+  ggsave("results/aim3/networks/07-healthy_node_roles.png", width = 5, height = 5)
   
   t_abnormal$plot_taxa_roles(use_type = 1)+
-    scale_color_manual(values = role_cols)
-  ggsave("results/aim3/networks/08-abnormal_node_roles.png")
+    scale_color_manual(values = role_cols)+theme(legend.position = "bottom")
+  ggsave("results/aim3/networks/08-abnormal_node_roles.png", width = 5, height = 5)
   
   #plot roles based on phylum
   role_shapes <- c(
