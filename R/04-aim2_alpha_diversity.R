@@ -127,11 +127,10 @@ kw_summary$Cardiometabolic_status <- c("Healthy", "Abnormal")
 
 bp <- ggplot(meta_pd, aes(x = lifestyle_group, y = PD, fill = lifestyle_group)) +
   geom_boxplot(outlier.shape = 21, color = "black") +
-  facet_wrap(~ Cardiometabolic_status, scales = "free_x") +
+  facet_wrap(~factor(Cardiometabolic_status, c("Healthy", "Abnormal")), scales = "free_x") +
   labs(
     x = NULL,
-    y = "Faith's PD",
-    title = "Faith's PD by Lifestyle and CV Status"
+    y = "Faith's PD"
   ) +
   theme_minimal() +
   theme(
@@ -141,7 +140,11 @@ bp <- ggplot(meta_pd, aes(x = lifestyle_group, y = PD, fill = lifestyle_group)) 
     axis.line = element_line(colour = "black"),
     panel.spacing = unit(0, "lines"),
     legend.position = "none",
-    plot.margin = margin(10, 10, 10, 10)) +
+    plot.margin = margin(10, 10, 10, 10),
+    axis.text.x = element_text(size = 12),
+    axis.text.y = element_text(size = 13),
+    axis.title.y = element_text(size = 14),
+    strip.text = element_text(size = 13, face = "bold")) +
   scale_fill_brewer(
     palette = "Set2")+
   scale_x_discrete(labels = c(
@@ -161,7 +164,7 @@ bp <- ggplot(meta_pd, aes(x = lifestyle_group, y = PD, fill = lifestyle_group)) 
 # Save
 ggsave("results/aim2/alpha_diversity/06-faith_PD_boxplot.png", 
        plot = bp, 
-       width = 10, height = 6, units = "in", dpi = 300)
+       width = 10, height = 5, units = "in", dpi = 300)
 
 ################################################################################################
 # Calculate Shannon's
@@ -224,11 +227,10 @@ kw_summary2$Cardiometabolic_status <- c("Healthy", "Abnormal")
 
 bp2 <- ggplot(meta_pd, aes(x = lifestyle_group, y = Shannon, fill = lifestyle_group)) +
   geom_boxplot(outlier.shape = 21, color = "black") +
-  facet_wrap(~ Cardiometabolic_status, scales = "free_x") +
+  facet_wrap(~factor(Cardiometabolic_status, c("Healthy", "Abnormal")), scales = "free_x") +
   labs(
     x = NULL,
-    y = "Shannon diversity (H')",
-    title = "Shannon diversity by Lifestyle and CV Status"
+    y = "Shannon diversity (H')"
   ) +
   theme_minimal() +
   theme(
@@ -238,7 +240,11 @@ bp2 <- ggplot(meta_pd, aes(x = lifestyle_group, y = Shannon, fill = lifestyle_gr
     axis.line = element_line(colour = "black"),
     panel.spacing = unit(0, "lines"),
     legend.position = "none",
-    plot.margin = margin(10, 10, 10, 10)) +
+    plot.margin = margin(10, 10, 10, 10),
+    axis.text.x = element_text(size = 12),
+    axis.text.y = element_text(size = 13),
+    axis.title.y = element_text(size = 14),
+    strip.text = element_text(size = 13, face = "bold")) +
   scale_fill_brewer(
     palette = "Set2")+
   scale_x_discrete(labels = c(
@@ -259,7 +265,7 @@ bp2 <- ggplot(meta_pd, aes(x = lifestyle_group, y = Shannon, fill = lifestyle_gr
 # Save
 ggsave("results/aim2/alpha_diversity/10-Shannon_boxplot.png", 
        plot = bp2, 
-       width = 10, height = 6, units = "in", dpi = 300)
+       width = 10, height = 5, units = "in", dpi = 300)
 }
 
 main()
