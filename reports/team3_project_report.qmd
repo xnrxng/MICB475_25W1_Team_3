@@ -44,7 +44,6 @@ The dataset was sourced from de la Cuesta-Zuluaga et al. 2018’s paper, whose r
 
 The accompanying metadata for each patient consists of multiple demographic parameters (age, biological sex, city of residence), anthropometric measures (body mass index, body fat percentage, waist circumference), lipid profiles in blood (HDL, LDL, adiponectin), macronutrient consumption, blood pressure, glucose metabolism profiles, and stool consistencies. A full list of available metadata with each variable’s range or factors can be found in @tbl-metadata-ranges.
 
-
 ```{r}
 #| label: tbl-metadata-ranges
 #| tbl-cap: Table of the multiple metadata information available for each patient. For categorical variables, it contains all factors. For numerical variables, it contains the numerical range of available values.
@@ -69,7 +68,7 @@ Prior to rarefying, using all 441 samples, a redundancy analysis (RDA) was perfo
 
 ```{r}
 #| label: tbl-prelim-rda
-#| tbl-cap: Redundancy Analysis results with hellinger-transformed phylum counts as a response matrix. Contains for each variable its degrees of freedom (Df), variance explained by the variable (Variance), its F-statistic (F), and the p-value from ANOVA-like permutation tests (Pr(>F)).
+#| tbl-cap: Redundancy Analysis results with hellinger-transformed phylum counts as a response matrix. Contains for each variable its degrees of freedom, variance explained by the variable, its F-statistic, and the p-value from ANOVA-like permutation tests.
 
 
 prelim_rda <- read_tsv("../results/04-prelim_anova_rda.tsv")
@@ -81,7 +80,7 @@ Furthermore, a logistic regression model was fit onto the metadata, where cardio
 
 ```{r}
 #| label: tbl-prelim-logreg
-#| tbl-cap: Logistic regression results with cardiometabolic status as the response variable. Contains for each variable the log-odds coefficient (Estimate), the standard error of the coefficient (Std. Error), its z-statistic (z), and its p-value (Pr(>|z|)). 
+#| tbl-cap: Logistic regression results with cardiometabolic status as the response variable. Contains for each variable the log-odds coefficient, the standard error of the coefficient, its z-statistic, and its p-value. 
 
 
 prelim_logreg <- read_tsv("../results/05-log_reg_summary.tsv")
@@ -106,5 +105,225 @@ knitr::kable(group_counts)
 ```
 
 ### Aim 1: Multiple Linear Regression
+
+
+The rarefied data's counts were aggregated at the phylum level. Then, relative abundances were calculated with Total Sum Scaling (TSS). Then, the data was normalied with an arcsine transformation. To see which phylum's relative abundances are significantly associated with caridometabolic status, a multiple linear regression model was fit with cardiometabolic status as the response variable, and the phylum as the predictors. The coefficients for each phylum are in @tbl-mlr_results. We can see that with an alpha significance level of 0.05, none of the phylum's relative abundances are significantly associated with cardiometabolic status.
+
+```{r}
+#| label: tbl-mlr_results
+#| tbl-cap: MLR results.
+
+mlr_res <- read_tsv("../results/aim1/02-mlr_coefficients.tsv")
+knitr::kable(mlr_res)
+```
+
+### Aim 1: Redundancy Analysis
+
+The rarefied data's counts were aggregated at the phylum level. Then, the data was transformed with Hellinger, which results in normalized relative abundances. A redundancy analysis (RDA) model was fit, where the response variables are the phylum relative abundances, and the predictors are the metadata. In the metadata, redundant variables were removed (country, latitude, age range). The results are in @tbl-rda_results. With an alpha signficance level of 0.05, we see that these variables explain the variance in ordination space in phylum relative abundances are: city, stool consistency, adiponectin, calorie intake, BMI, and fiber.
+
+```{r}
+#| label: tbl-rda_results
+#| tbl-cap: RDA results.
+
+rda_res <- read_tsv("../results/aim1/04-rda_coefficients.tsv")
+knitr::kable(rda_res)
+```
+
+However, when we look at the four subgroups with an ordination plot, we do not see any differences (@fig-rda_ord).
+
+![RDA ordination plot, of all four subgroups.](../results/aim1/06-ordination_plot.png){#fig-rda_ord}
+
+For the values that were selected as statistically significant, a new model was fit using them with PERMANOVA (adonis2 from the vegan package). The coefficients can be found in @tbl-adonis_results. We see that BMI, calorie intake, and fiber do not significantly structure the multivariate distances. However, it is to be noted that the p-value for fiber was barely insignificant (p = 0.058).
+
+```{r}
+#| label: tbl-adonis_results
+#| tbl-cap: adonis2 results with the statistically significant variables from the RDA.
+
+adonis_res <- read_tsv("../results/aim1/05-adonis_sig_rda.tsv")
+knitr::kable(adonis_res)
+```
+
+### Aim 1: Least Absolute Shrinkage and Selection Operator (metadata only)
+
+To first explore the data, numeric variables' correlation (Spearman) were visualized in a heatmap. Only numeric variables were included as LASSO does not support categorical variables. We see that some variables are highly correlated with each other in @fig-heatmap (BMI with waist circumference, diastolic bp with systolic bp, VLDL with triglycerides, and cholesterol with LDL). Due to multicollinearity, we do expect that during feature selection, one of the highly correlated variables will be dropped.
+
+![Heatmap of numeric variables' correlation. Presence of asterisks indicates the significance of the Spearman correlation value.](../results/aim1/0-heatmap_num_variables.png){#fig-heatmap}
+
+The data was divided into a training and testing set, with a 50/50 split. As mentioned above, only numeric variables were included. Cardiometabolic status, the response variable, was converted to a binary value (0 and 1). On the training set, LASSO selection is performed with 10-fold cross-validation to find the minimum lambda. We used the minimum lambda, instead of the 1-se lambda, as we wished to create a model with the highest AUC. We can see the crossvalidation in @fig-lasso_crossvalidation that the lambda that maximizes the AUC value is associated with between 16 and 20 variables.
+
+![LASSO crossvalidation.](../results/aim1/07-lasso_crossvalidation.png){#fig-lasso_crossvalidation}
+
+We find the coefficients from a logistic regression using the LASSO selected model, as these will be needed for prediction. These are: adiponectin, BMI, calorie intake, diastolic bp, fiber, glucose, CRP, insulin, total cholesterol, HDL, triglycerides, percentage total fat, percentage animal protein, percentage monounsaturated fat, percentage polyunsaturated fat, percentage saturated fat, systolic bp, and waist circumference.
+
+The selected model was fit onto the testing set for inference purposes. The results are in @tbl-lasso_metadata_inference. We see that from the selected variables, only these ones were significantly associated with cardiometabolic status outcome: glucose, HDL, insulin, CRP, and systolic bp. 
+
+```{r}
+#| label: tbl-lasso_metadata_inference
+#| tbl-cap: Exponentiated estimates from the Logistic Regression, on the testing set.
+
+lasso_hypothesis <- read_tsv("../results/aim1/08-lasso_hypothesis_testing.tsv")
+knitr::kable(lasso_hypothesis)
+```
+
+For prediction, we first perform the coefficients selected by LASSO on the testing set. Then, we used a confusion matrix for evaluation, with a threshold of 0.5.
+
+The number of true positives is 91, for true negatives is 50, for false positives is 15, and for false negatives is 11. The sensitivity of the model is 0.77 whereas the specificity is 0.89. Thus, the model is better at predicting when the cardiometabolic status is healthy, but not at predicting when the status is abnormal. The accuracy is 0.84, while Cohen's Kappa value is 0.67.
+
+We then looked at the ROC of this model on the test set in order to see prediction performance under all threshold levels. From @fig-lasso_roc_curve, we see that the AUC is quite high (0.93). 
+
+![ROC plot of the LASSO logistic model on the testing set.](../results/aim1/10-lasso_roc_curve.png){#fig-lasso_roc_curve}
+
+Overall, we can conclude that although fibre was selected as a predictor by LASSO, fibre on its own is not significantly associated with the outcomes of cardiometabolic status. 
+
+### Aim 2: Alpha diversity
+
+For Faith's phylogenetic diversity, the phylogenetic tree had to be resolved. Polyomies were resolved and converted into a fully dichotomous tree, branch lengths were assigned with Grafen, the tree was made ultrameric, and any zero-length edges were replaced with 1e-6. Node ages were also calculated.
+
+For the eight subgroups (factoring in fibre, exercise, and cardiometabolic status), Faith's phylogenetic diversity was factored in. For each cardiometabolic status, Kruskal-Wallis tests were computed to test differences among the 4 groups. From @fig-alpha_faith, we see that there is no difference across groups.
+
+![Faith's PD boxplots, by lifestyle and cardiovascular status.](../results/aim2/alpha_diversity/06-faith_PD_boxplot.png){#fig-alpha_faith}
+
+Pairwise comparisons using Wilcoxon tests with Bonferroni-Holm correction were also computed, which are in @tbl-alpha_faith. We see that there are no significant differences in any pair either.
+
+```{r}
+#| label: tbl-alpha_faith
+#| tbl-cap: Pairwise Wilcoxon test results with Bonferroni-Holm correction on Faith's PD metric.
+
+alpha_faith <- read_tsv("../results/aim2/alpha_diversity/05-pairwise_wilcox_group.tsv")
+knitr::kable(alpha_faith)
+```
+
+Shannon's diversity was also computed, which is seen in @fig-alpha_shannon. Kruskwal-Wallis tests were also computed, and we also see no difference amongst grops.
+
+![Shannon's diversity boxplots, by lifestyle and cardiovascular status.](../results/aim2/alpha_diversity/10-Shannon_boxplot.png){#fig-alpha_shannon}
+
+Similarly, pairwise comparisons using Wilcoxon tests with Bonferroni-Holm correction were also computed, which are in @tbl-alpha_shannon. We see that there are no significant differences in any pair either.
+
+```{r}
+#| label: tbl-alpha_shannon
+#| tbl-cap: Pairwise Wilcoxon test results with Bonferroni-Holm correction on Shannon's Diversity metric.
+
+alpha_shannon <- read_tsv("../results/aim2/alpha_diversity/09-pairwise_wilcox_group2.tsv")
+knitr::kable(alpha_shannon)
+```
+
+### Aim 2: Beta diversity
+
+Similarly to alpha diversity, beta diversity for the subgroups was calculated with Bray-curtis. The ordination was calculated, and PCoA plots were produced for each cardiometabolic status. Within each cardiometabolic status, the PERMANOVA of the groups was calculated. From @fig-beta, we see that there are no differences.
+
+![Bray-Curtis PCoA plot, with 95% confidence interval ellipses drawn.](../results/aim2/beta_diversity/07-pcoa_plot.png){#fig-beta}
+
+### Aim 3: DESeq2
+
+On the raw, non-rarefied data, counts had 1 added to their counts to avoid non-zero data. The data was then split by cardiometabolic status. On each subset, the fibre and exercise group were added as contrasts, with the variables selected by RDA as covariates to control for them (fibre_group + exercise_group + adiponectin + BMI + Calorie_intake + city + stool_consistency). 
+
+The volcano plots are in @fig-volcano. The absolute logFC cutoff was 1.5, and the FDR cutoff was 0.05. We see that there are many taxa over- or under-represented in each group.
+
+![Volcano plots of fibre and exercise contrasts, separated by cardiometabolic status.](../results/aim3/DESeq2/05-DESeq_Volcano_Plot.png){#fig-volcano}
+
+To investigate the taxa further, logFC plots were made, aggregated by family. For these plots, only taxa with an absolute logFC bigger than 2 and a FDR under 0.05 were considered. The plots are in @fig-logfc_families. Within the healthy cardiometabolic groups, adequate exercise showed an increase in three taxa including Lachnospiraceae, Christensenellaceae, and Oscillospiraceae. Several taxa were also decreased in this group, with the most abundant being Oscillospiraceae and Eggerthellaceae. Adequate fibre resulted in an increase in different taxa, with the greatest increase in Ruminococcaceae.
+
+Among the abnormal cardiometabolic groups, adequate exercise resulted in an increase in taxa including Bifidobacteriaceae and Eggerthellaceae. A large decrease in the abundance of Lachnospiraceae was also observed, along with other taxa to a lesser extent. Adequate fibre within the abnormal cardiometabolic group resulted in an increase in a large number of taxa, with the greatest difference in Prevotellaceae, which was simultaneously the most increased and decreased. 
+
+![LogFC plots of fibre and exercise contrasts aggregated by family, separated by cardiometabolic status.](../results/aim3/DESeq2/06-DESeq_Log2_Fold_Change_Plot_family.png){#fig-logfc_families}
+
+The same plot was done, but aggregated at the phylum level, which is in @fig-logfc_phyla
+
+![LogFC plots of fibre and exercise contrasts aggregated by phylum, separated by cardiometabolic status.](../results/aim3/DESeq2/07-DESeq_Log2_Fold_Change_Plot_phylum.png){#fig-logfc_phyla}
+
+### Aim 3: Least Absolute Shrinkage and Selection Operator (counts only)
+
+To prepare the counts for LASSO, counts were aggregated at the phylum level, relative abundances calculated with TSS, and transformed with Center Log Ratio.
+
+The data was divided into a training and testing set, with a 50/50 split. Cardiometabolic status, the response variable, was converted to a binary value (0 and 1). On the training set, LASSO selection was performed with 10-fold cross-validation to find the minimum lambda. We can see the crossvalidation in @fig-lasso_crossvalidation3 that the lambda that maximizes the AUC value is associated with under 4 variables. However, we also see that no matter the selected variables, the AUC values are quite low.
+
+![LASSO crossvalidation.](../results/aim3/LASSO/01-lasso_crossvalidation.png){#fig-lasso_crossvalidation3}
+
+We find the coefficients from a logistic regression using the LASSO selected model, as these will be needed for prediction. It was only Bacteroidota. The selected model was fit onto the testing set for inference purposes. The results are in @tbl-lasso_metadata_inference3. We see that Bacteroidota is not significantly associated with the outcomes of cardiometabolic status.
+
+```{r}
+#| label: tbl-lasso_metadata_inference3
+#| tbl-cap: Exponentiated estimates from the Logistic Regression, on the testing set.
+
+lasso_hypothesis3 <- read_tsv("../results/aim3/LASSO/02-lasso_hypothesis_testing.tsv")
+knitr::kable(lasso_hypothesis3)
+```
+
+For prediction, we first perform the coefficients selected by LASSO on the testing set. Then, we used a confusion matrix for evaluation, with a threshold of 0.5.
+
+The number of true positives is 102, for true negatives is 0, for false positives is 0, and for false negatives is 65. The sensitivity of the model is 0 whereas the specificity is 100%. Thus, the model seems to always predict the status as healthy. The accuracy is 0.61, while Cohen's Kappa value is 0.
+
+We then looked at the ROC of this model on the test set in order to see prediction performance under all threshold levels. From @fig-lasso_roc_curve3, we see that the AUC is 0.537, meaning that the model does not perform better than chance.
+
+![ROC plot of the LASSO logistic model on the testing set.](../results/aim3/LASSO/04-lasso_roc_curve.png){#fig-lasso_roc_curve3}
+
+### Aim 3: Networks
+
+Microbial co-occurrence networks were constructed separately for healthy and abnormal samples using the trans_network class in the microeco R package. Genus-level abundance tables were used as input. Taxa with mean relative abundances below 0.0001 were filtered out. Pairwise associations between taxa were estimated using Spearman’s rank correlation coefficient. For each group, correlation matrices were used to infer co-occurrence networks by retaining statistically significant associations (permutation-based p < 0.05). The resulting adjacency matrices were then used to construct the final networks, after which network modules were identified.
+
+10 modules were identified in the healthy cohort (@fig-healthy_module) whereas 11 were identified in the abnormal cohort (@fig-abnormal_module).
+
+![Networks colored by module in the healthy cohort.](../results/aim3/networks/05-healthy_modules_phylum.png){#fig-healthy_module}
+
+![Networks colored by module in the abnormal cohort.](../results/aim3/networks/03-abnormal_modules_phylum.png){#fig-abnormal_module}
+
+In @fig-healthy_phylum and  @fig-abnormal_phylum, we can see the same networks but colored by phylum.
+
+![Networks colored by phylum in the healthy cohort.](../results/aim3/networks/06-healthy_phylum_colored.png){#fig-healthy_phylum}
+
+![Networks colored by phylum in the abnormal cohort.](../results/aim3/networks/04-abnormal_phylum_colored.png){#fig-abnormal_phylum}
+
+Next, global and node-level network attributes were computed. To characterize the ecological roles of individual taxa within each network, node-level metrics were extracted and used to classify taxa into topological roles based on within-module connectivity (Zi) and among-module connectivity (Pi). From @fig-healthy_taxa and @fig-abnormal_taxa, we see that the abnormal cohort contains a greater number of connectors.
+
+![Taxa roles in the healthy cohort.](../results/aim3/networks/07-healthy_node_roles.png){#fig-healthy_taxa}
+
+![Taxa roles in the abnormal cohort.](../results/aim3/networks/08-abnormal_node_roles.png){#fig-abnormal_taxa}
+
+In @fig-healthy_taxa2 and @fig-abnormal_taxa2, we can see which phylum were categorized into which roles. We see that the connectors in the abnormal cohort were from the Bacillota phylum.
+
+![Taxa roles in the healthy cohort, by phylum.](../results/aim3/networks/09-healthy_node_roles_phylum.png){#fig-healthy_taxa2}
+
+![Taxa roles in the abnormal cohort, by phylum.](../results/aim3/networks/10-abnormal_node_roles_phylum.png){#fig-abnormal_taxa2}
+
+To summarize the abundance patterns of network modules, module eigengenes were calculated separately for the healthy and abnormal co-occurrence networks. Associations between module eigengenes and host or environmental variables were evaluated using the trans_env class. For each dataset, environmental variables including dietary fiber intake, physical activity (MET minutes per week), age, total caloric intake, body mass index (BMI), and circulating adiponectin levels were selected. Spearman rank correlations were calculated between module eigengenes and environmental variables, with module eigengene tables supplied as the response matrix. We see in @fig-healthy_correlation that no variables were significantly associated with any of the modules, whereas in @fig-abnormal_correlation module 6 was significantly associated with exercise (METs).
+
+![Heatmap of Spearman correlation of module eigengenes with metadata attributes in the healthy cohort.](../results/aim3/networks/11-healthy_meta_correlation.png){#fig-healthy_correlation}
+
+![Heatmap of Spearman correlation of module eigengenes with metadata attributes in the abnormal cohort.](../results/aim3/networks/12-abnormal_meta_correlation.png){#fig-abnormal_correlation}
+
+### Aim 4: Functional analysis
+
+Functional potential of the microbial communities was inferred using PICRUSt2, and predicted KEGG Ortholog (KO) abundances were obtained from the unstratified metagenome output. Differential abundance analysis (DAA) of predicted KOs was performed separately for healthy and abnormal cardiometabolic status groups, with fibre and exercise as contrasts. Statistical testing was performed using the edgeR framework, which models count data using negative binomial distributions and accounts for differences in library size. Significantly differentially abundant KOs were subsequently annotated, specifying KEGG Ortholog pathways and enabling mapping of KO identifiers to KEGG pathway annotations.
+
+A threshold of an absolute log2FC of 4 and a FDR under 0.01 were selected. In @fig-pathwaylogfc, these pathways were visualized.
+
+Compared to the abnormal cardiometabolic groups, we observed a greater number of increased pathways overall. Specifically, in the adequate exercise group, several metabolic and signalling pathways were increased. The adequate fibre group showed an increase in protein metabolism and cellular signalling, as well as a decrease in some signal transduction and energy metabolism. In contrast, we observed a larger number of decreased pathways in the abnormal cardiometabolic groups. Adequate exercise promoted few pathways including the metabolism of cofactors and vitamins, as well as cellular processes. However, there was a large decrease in infectious disease pathways and xenobiotic biodegradation. Within the adequate fibre group, the greatest decrease was observed in the infectious disease pathway.
+
+
+![Log2FC plots of pathways.](../results/aim4/05-pathway_class_Log2_Fold_Change_Plot.png){#fig-pathwaylogfc}
+
+To see the correlation of pathways, KO abundance tables were first transformed to relative abundances by normalizing each sample to its total KO count. For each cardiometabolic status group, KOs identified as significantly differentially abundant in fibre and exercise contrasts were selected based on an adjusted p-value under 0.01 and an absolute log2FC > 4. Spearman rank correlation matrices were calculated among the selected differentially abundant KOs using sample-wise relative abundance profiles. Correlation analyses were conducted separately for fiber- and exercise-associated KOs within each cardiometabolic status group. These correlations can be found in @fig-healthyfibre, @fig-healthyexercise, @fig-abnormalfibre, and @fig-abnormalexercise.
+
+![Heatmap of KO terms with fibre contrast, in the healthy cohort.](../results/aim4/06-healthy_fibre_heatmap.png){#fig-healthyfibre}
+
+![Heatmap of KO terms with exercise contrast, in the healthy cohort.](../results/aim4/07-healthy_exercise_heatmap.png){#fig-healthyexercise}
+
+![Heatmap of KO terms with fibre contrast, in the abnormal cohort.](../results/aim4/08-abnormal_fibre_heatmap.png){#fig-abnormalfibre}
+
+![Heatmap of KO terms with exercise contrast, in the abnormal cohort.](../results/aim4/09-abnormal_exercise_heatmap.png){#fig-abnormalexercise}
+
+Lastly, multivariate patterns in predicted functional composition were explored using principal component analysis (PCA) of KEGG Ortholog (KO) abundance profiles. PCA was performed separately for healthy and abnormal cardiometabolic status groups. KO abundance tables were used as input, and sample metadata were incorporated to define grouping variables. Ordinations were generated for contrasts based on dietary fiber intake group and physical activity (exercise) group. These PCA plots can be found in @fig-healthyfibre_pca, @fig-healthyexercise_pca, @fig-abnormalfibre_pca, and @fig-abnormalexercise_pca.
+
+![PCA of KO profiles with fibre contrast, in the healthy cohort.](../results/aim4/10-healthy_fibre_pca.png){#fig-healthyfibre_pca}
+
+![PCA of KO profiles with exercise contrast, in the healthy cohort.](../results/aim4/11-healthy_exercise_pca.png){#fig-healthyexercise_pca}
+
+![PCA of KO profiles with fibre contrast, in the abnormal cohort.](../results/aim4/12-abnormal_fibre_pca.png){#fig-abnormalfibre_pca}
+
+![PCA of KO profiles with exercise contrast, in the abnormal cohort.](../results/aim4/13-abnormal_exercise_pca.png){#fig-abnormalexercise_pca}
+
+## Conclusion
+
+In a Colombian population newly undergoing westernization, we found that fibre and exercise promote several SCFA-producing bacteria as well as reduce pathogenic pathways. Overall, this may have a synergistic effect and support cardiometabolic health. Despite several studies reporting that fibre and exercise promote greater microbial diversity, it appears that these changes may need more time to accumulate. 
 
 ## References

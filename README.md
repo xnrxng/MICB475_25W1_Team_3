@@ -12,7 +12,7 @@ More information on the contents of this repository is below.
 
 ![](results/gantt_chart.png)
 
-The project's report/digital lab notebook can be found in the `reports/` folder. Available formats are [Quarto MarkDown](https://github.com/xnrxng/MICB475_25W1_Team_3/blob/main/reports/team3_project_report.qmd), [PDF](https://github.com/xnrxng/MICB475_25W1_Team_3/blob/main/reports/team3_project_report.pdf), and [HTML](https://github.com/xnrxng/MICB475_25W1_Team_3/blob/main/reports/team3_project_report.html).
+The project's report/digital lab notebook can be found in the `reports/` folder. Available formats are [Quarto MarkDown](https://github.com/xnrxng/MICB475_25W1_Team_3/blob/main/reports/team3_project_report.qmd), [PDF](https://github.com/xnrxng/MICB475_25W1_Team_3/blob/main/reports/team3_project_report.pdf), and [HTML](https://github.com/xnrxng/MICB475_25W1_Team_3/blob/main/reports/team3_project_report.html). We HIGHLY recommend the HTML format (some sections were not rendered properly in the PDF version). The HTML will require prior local downloading first.
 
 ## Team meetings
 
@@ -80,7 +80,7 @@ To reproduce the results FULLY in this repository, you should have the following
 
 8.  To run any Rscripts, you will have to create an R environment with:
 
-    ``` R
+    ``` r
     if (!require("renv", quietly = TRUE)) {
       install.packages("renv")
     }
@@ -92,7 +92,7 @@ To reproduce the results FULLY in this repository, you should have the following
 
     Followed by:
 
-    ``` R
+    ``` r
     renv::activate()
     ```
 
