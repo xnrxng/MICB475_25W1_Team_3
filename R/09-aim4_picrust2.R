@@ -113,12 +113,13 @@ main <- function(){
     geom_bar(stat = "identity") +
     coord_flip() +  # horizontal bars
     scale_fill_manual(values = c("#CC3C82", "#699CCC"), labels = c("Under-represented","Over-represented")) +
-    labs(title = "Fibre Contrast",
+    labs(title = "Healthy",
          x = NULL,
-         y = "log2 Fold Change",
+         y = "log2FC (fibre contrast)",
          fill = "Direction") +
     theme_classic()+
-    theme(legend.position = "none")
+    theme(legend.position = "none",
+          axis.text.y = element_text(size = 13))
   
    #healthy exercise
   sig_healthy_exercise_annot <- daa_healthy_exercise_annot |>
@@ -148,12 +149,13 @@ main <- function(){
     geom_bar(stat = "identity") +
     coord_flip() +  # horizontal bars
     scale_fill_manual(values = c("#699CCC", "#CC3C82"), labels = c("Under-represented","Over-represented")) +
-    labs(title = "Exercise Contrast",
+    labs(title = "Healthy",
          x = NULL,
-         y = "log2 Fold Change",
+         y = "log2FC (exercise contrast)",
          fill = "Direction") +
     theme_classic()+
-    theme(legend.position = "none")
+    theme(legend.position = "none",
+          axis.text.y = element_text(size = 13))
   
   # abnormal fibre
   sig_abnormal_fibre_annot <- daa_abnormal_fibre_annot |>
@@ -183,12 +185,13 @@ main <- function(){
     geom_bar(stat = "identity") +
     coord_flip() +  # horizontal bars
     scale_fill_manual(values = c("#CC3C82", "#699CCC"), labels = c("Under-represented","Over-represented")) +
-    labs(title = "Fibre Contrast",
+    labs(title = "Abnormal",
          x = NULL,
-         y = "log2 Fold Change",
+         y = "log2FC (fibre contrast)",
          fill = "Direction") +
     theme_classic()+
-    theme(legend.position = "none")
+    theme(legend.position = "none",
+          axis.text.y = element_text(size = 13))
   
   #abnormal exercise
   sig_abnormal_exercise_annot <- daa_abnormal_exercise_annot |>
@@ -218,22 +221,12 @@ main <- function(){
     geom_bar(stat = "identity") +
     coord_flip() +  # horizontal bars
     scale_fill_manual(values = c("#CC3C82", "#699CCC"), labels = c("Under-represented","Over-represented")) +
-    labs(title = "Exercise Contrast",
+    labs(title = "Abnormal",
          x = NULL,
-         y = "log2 Fold Change",
+         y = "log2FC (exercise contrast)",
          fill = "Direction") +
     theme_classic()+
-    theme(legend.position = "none")
-  
-  title_healthy  <- ggplot() + 
-    theme_void() + 
-    ggtitle("Healthy CV") +
-    theme(plot.title = element_text(hjust = 0.5, size = 14, face = "bold"))
-  
-  title_abnormal <- ggplot() + 
-    theme_void() + 
-    ggtitle("Abnormal CV") +
-    theme(plot.title = element_text(hjust = 0.5, size = 14, face = "bold"))
+    theme(legend.position = "none",axis.text.y = element_text(size = 13))
   
   # Top row = exercise
   top_row <- bar_health_exercise + bar_abnormal_exercise
@@ -243,14 +236,13 @@ main <- function(){
   
   # Combine
   bar_panel <- 
-    (title_healthy + title_abnormal) /   # column headers
     top_row / 
     bottom_row +
-    plot_layout(heights = c(0.1, 1, 1))  # shrink header row
+    plot_layout(heights = c(1, 1))  # shrink header row
   
   #Save the plot
   ggsave(plot = bar_panel, "results/aim4/05-pathway_class_Log2_Fold_Change_Plot.png", 
-         width = 12, height = 7, units = "in", dpi = 300)
+         width = 15, height = 9, units = "in", dpi = 300)
   
   # heatmap
   # healthy
