@@ -96,17 +96,29 @@ main <- function(){
   role_cols <- c(
     "Peripheral nodes" = "#1f77b4",
     "Connectors"  = "#ff7f0e",
-    "Module hubs" = "#2ca02c",
-    "NA" = "lightgray"
+    "Module hubs" = "#2ca02c"
   )
   
   t_healthy$plot_taxa_roles(use_type = 1)+
-    scale_color_manual(values = role_cols)+theme(legend.position = "bottom")
-  ggsave("results/aim3/networks/07-healthy_node_roles.png", width = 5, height = 5)
+    scale_color_manual(values = role_cols, na.translate = FALSE)+theme(legend.position = "bottom",
+                                                 axis.text.x = element_text(size = 13),
+                                                 axis.text.y = element_text(size = 13),
+                                                 axis.title.y = element_text(size = 14),
+                                                 axis.title.x = element_text(size = 14),
+                                                 legend.title = element_text(size = 14),
+                                                 legend.text  = element_text(size = 14)
+                                                 )
+  ggsave("results/aim3/networks/07-healthy_node_roles.png", width = 6, height = 5)
   
   t_abnormal$plot_taxa_roles(use_type = 1)+
-    scale_color_manual(values = role_cols)+theme(legend.position = "bottom")
-  ggsave("results/aim3/networks/08-abnormal_node_roles.png", width = 5, height = 5)
+    scale_color_manual(values = role_cols, na.translate = FALSE)+theme(legend.position = "bottom",
+                                                 axis.text.x = element_text(size = 13),
+                                                 axis.text.y = element_text(size = 13),
+                                                 axis.title.y = element_text(size = 14),
+                                                 axis.title.x = element_text(size = 14),
+                                                 legend.title = element_text(size = 14),
+                                                 legend.text  = element_text(size = 14))
+  ggsave("results/aim3/networks/08-abnormal_node_roles.png", width = 6, height = 5)
   
   #plot roles based on phylum
   role_shapes <- c(
@@ -139,19 +151,50 @@ main <- function(){
   t_abnormal$cal_eigen()
   
   #correlation
+  proper_labels <- c(
+    fiber              = "Fibre",
+    MET_mins_per_week  = "MET",
+    age_years          = "Age",
+    Calorie_intake     = "Calorie intake",
+    BMI                = "BMI",
+    adiponectin        = "Adiponectin"
+  )
+  
+  x_order <- c(
+    "fiber",
+    "MET_mins_per_week",
+    "age_years",
+    "Calorie_intake",
+    "BMI",
+    "adiponectin"
+  )
+  
   t2_healthy <- trans_env$new(dataset = dataset_healthy, 
                       env_cols = c("fiber", "MET_mins_per_week", "age_years", "Calorie_intake", "BMI", "adiponectin"))
   t2_healthy$cal_cor(add_abund_table = t_healthy$res_eigen)
   
-  t2_healthy$plot_cor(text_y_order = c("M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8", "M9") )
+  t2_healthy$plot_cor(text_y_order = c("M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8", "M9")) +
+    theme(axis.text.x = element_text(size = 13),
+          axis.text.y = element_text(size = 13),
+           legend.title = element_text(size = 14),
+           legend.text  = element_text(size = 14))+
+    scale_x_discrete(labels = proper_labels,
+                     limits = x_order) 
+  
   ggsave("results/aim3/networks/11-healthy_meta_correlation.png", width = 6, height = 5)
   
   t2_abnormal <- trans_env$new(dataset = dataset_abnormal, 
                               env_cols = c("fiber", "MET_mins_per_week", "age_years", "Calorie_intake", "BMI", "adiponectin"))
   t2_abnormal$cal_cor(add_abund_table = t_abnormal$res_eigen)
   
-  t2_abnormal$plot_cor(text_y_order = c("M1", "M2", "M3", "M4", "M5", "M6", "M7"),
-                       text_x_order = c("BMI", "MET_mins_per_week", "adiponectin", "Calorie_intake", "fiber"), sig_label_size = 8)
+  t2_abnormal$plot_cor(text_y_order = c("M1", "M2", "M3", "M4", "M5", "M6", "M7"), sig_label_size = 15)+
+  theme(axis.text.x = element_text(size = 13),
+        axis.text.y = element_text(size = 13),
+        legend.title = element_text(size = 14),
+        legend.text  = element_text(size = 14))+
+  scale_x_discrete(labels = proper_labels,
+                   limits = x_order) 
+
   ggsave("results/aim3/networks/12-abnormal_meta_correlation.png", width = 6, height = 5)
   
   write_tsv(t_healthy[["res_node_table"]], "results/aim3/networks/13-healthy_network_roles.tsv")

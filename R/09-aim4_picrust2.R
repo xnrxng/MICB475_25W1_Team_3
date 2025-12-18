@@ -237,7 +237,7 @@ main <- function(){
   # Combine
   bar_panel <- 
     top_row / 
-    bottom_row +
+    bottom_row + 
     plot_layout(heights = c(1, 1))  # shrink header row
   
   #Save the plot
