@@ -77,7 +77,7 @@ main <- function(){
     stat_ellipse(level = 0.95, linetype = 2) + 
     labs(x = paste0("PCoA1 (", PC1_pct_healthy, "%)"),
          y = paste0("PCoA2 (", PC2_pct_healthy, "%)"),
-         title = "Healthy CV",
+         title = "Healthy",
          subtitle = paste0("PERMANOVA p = ", pval_healthy),
          color = "Lifestyle \ngroup") +
     scale_color_brewer(
@@ -89,7 +89,11 @@ main <- function(){
         "inadequate fibre;low exercise"   = "Low fibre\nLow exercise"
       )) +
     theme_classic()+
-    theme(legend.position = "none")
+    theme(legend.position = "none",  axis.text.x = element_text(size = 13),
+          axis.text.y = element_text(size = 13),
+          axis.title.y = element_text(size = 13),
+          axis.title.x = element_text(size = 13),
+          strip.text = element_text(size = 13, face = "bold"))
   
   var_explained_abnormal <- ord_abnormal$values$Relative_eig * 100
   PC1_pct_abnormal <- round(var_explained_abnormal[1], 1)
@@ -100,7 +104,7 @@ main <- function(){
     stat_ellipse(level = 0.95, linetype = 2) + 
     labs(x = paste0("PCoA1 (", PC1_pct_abnormal, "%)"),
          y = paste0("PCoA2 (", PC2_pct_abnormal, "%)"),
-         title = "Abnormal CV",
+         title = "Abnormal",
          subtitle = paste0("PERMANOVA p = ", pval_abnormal),
          color = "Lifestyle \ngroup") +
     scale_color_brewer(
@@ -112,12 +116,18 @@ main <- function(){
         "inadequate fibre;low exercise"   = "Low fibre\nLow exercise"
       )) +
     theme_classic()+
-    theme(legend.position = "none")
+    theme(legend.position = "none",  axis.text.x = element_text(size = 13),
+          axis.text.y = element_text(size = 13),
+          axis.title.y = element_text(size = 13),
+          axis.title.x = element_text(size = 13),
+          strip.text = element_text(size = 13, face = "bold"))
   
   # combine plots
   final_plot <- (bray_plot_healthy + bray_plot_abnormal) +
     plot_layout(guides = "collect") &
-    theme(legend.position = "bottom")
+    theme(legend.position = "bottom",
+          legend.title = element_text(size = 14),
+          legend.text  = element_text(size = 14))
   
   ggsave(plot = final_plot, "results/aim2/beta_diversity/07-pcoa_plot.png",
          width = 10, height = 6)
